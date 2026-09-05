@@ -1,0 +1,23 @@
+# Adão Corretor de Imóveis
+
+Adão de Souza Dourado é corretor de imóveis registrado no CRECI-GO 8627. Sua base de atendimento fica em Aparecida de Goiânia, Goiás. O atendimento para outras regiões deve ser consultado diretamente.
+
+## O que faz
+
+Adão atende pessoas interessadas em comprar, vender ou alugar imóveis. O catálogo foi estruturado para separar imóveis por finalidade e tipo, incluindo apartamentos, casas, espaços comerciais, terrenos e propriedades rurais.
+
+## Como funciona o site
+
+A página inicial apresenta o corretor, os principais serviços e imóveis em destaque. A página /imoveis permite filtrar o catálogo. Cada imóvel possui uma página própria com galeria, características, descrição, localização aproximada e contato contextual pelo WhatsApp.
+
+As combinações arbitrárias de filtros não são indexadas. Imóveis ativos entram no sitemap automaticamente. Imóveis arquivados não aparecem no catálogo público.
+
+## Contato
+
+- WhatsApp: +55 62 99256-7575
+- Telefone alternativo: +55 62 99426-9612
+- E-mails: adaodourado24@gmail.com e viniciusbinha92@gmail.com
+
+## Conteúdo demonstrativo
+
+Enquanto os cadastros reais não são conectados, o catálogo contém registros claramente identificados como demonstrativos. As imagens foram geradas para validar o design e não representam propriedades reais.

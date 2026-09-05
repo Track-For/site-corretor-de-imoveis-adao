@@ -1,0 +1,38 @@
+# Adão Corretor de Imóveis
+
+> Corretor de imóveis registrado no CRECI-GO 8627. Atua com compra, venda e locação de imóveis residenciais, comerciais, terrenos e propriedades rurais.
+
+## Páginas principais
+
+- /: apresentação de Adão e imóveis em destaque
+- /imoveis: catálogo com filtros por finalidade, tipo, cidade e características
+- /sobre: perfil profissional e forma de atendimento
+- /servicos: compra, venda, locação e catálogos por tipo
+- /contato: telefones, e-mails, WhatsApp e formulário
+- /privacidade: informações sobre tratamento de dados
+
+## Área de atendimento
+
+- Base em Aparecida de Goiânia, Goiás
+- Outras regiões mediante consulta
+
+## Serviços
+
+- compra de imóveis
+- venda de imóveis
+- locação
+- imóveis residenciais
+- imóveis comerciais
+- terrenos
+- imóveis rurais
+
+## Contato público
+
+- Telefone e WhatsApp: +55 62 99256-7575
+- Telefone alternativo: +55 62 99426-9612
+- E-mail: adaodourado24@gmail.com
+- E-mail alternativo: viniciusbinha92@gmail.com
+
+## Observação da versão atual
+
+Os imóveis marcados como demonstrativos usam fotos, dados e valores de exemplo. Eles serão substituídos por cadastros reais gerenciados no Supabase.
