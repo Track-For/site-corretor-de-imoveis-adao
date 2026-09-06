@@ -184,27 +184,6 @@ export default async function HomePage() {
               Para comprar, vender ou alugar com clareza, repertório local e
               uma conversa direta do primeiro contato às chaves
             </p>
-            <div className="hero__actions">
-              <Link
-                href="/imoveis"
-                className="button button--primary"
-                data-track="view_property_list"
-              >
-                Ver imóveis
-                <ArrowRight size={19} weight="bold" aria-hidden="true" />
-              </Link>
-              <a
-                href={buildGeneralWhatsAppUrl()}
-                className="button button--secondary"
-                target="_blank"
-                rel="noreferrer"
-                data-track="whatsapp_click"
-                data-destination="hero"
-              >
-                <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
-                Falar com Adão
-              </a>
-            </div>
             <div className="hero__trust" aria-label="Informações profissionais">
               <span>Atendimento pessoal</span>
               <span>{broker.address.city}</span>
@@ -244,6 +223,27 @@ export default async function HomePage() {
                 endereço que faça sentido
               </p>
             </div>
+          </div>
+          <div className="hero__actions">
+            <Link
+              href="/imoveis"
+              className="button button--primary"
+              data-track="view_property_list"
+            >
+              Ver imóveis
+              <ArrowRight size={19} weight="bold" aria-hidden="true" />
+            </Link>
+            <a
+              href={buildGeneralWhatsAppUrl()}
+              className="button button--secondary"
+              target="_blank"
+              rel="noreferrer"
+              data-track="whatsapp_click"
+              data-destination="hero"
+            >
+              <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
+              Falar com Adão
+            </a>
           </div>
           <div className="hero__aside" aria-hidden="true">
             <span>Residencial</span>
