@@ -211,6 +211,40 @@ export default async function HomePage() {
               <span>{broker.creci}</span>
             </div>
           </div>
+          <div className="hero__story" aria-hidden="true">
+            <div className="hero__chapter hero__chapter--curation">
+              <div className="hero__chapter-meta">
+                <span>02 / 03</span>
+                <i />
+                <span>Curadoria com propósito</span>
+              </div>
+              <p className="hero__chapter-title">
+                <span>Um olhar atento</span>
+                <span>revela o lugar</span>
+                <span><em>certo</em></span>
+              </p>
+              <p className="hero__chapter-description">
+                Cada escolha começa entendendo sua rotina, seus planos e o que
+                realmente importa para você
+              </p>
+            </div>
+            <div className="hero__chapter hero__chapter--confidence">
+              <div className="hero__chapter-meta">
+                <span>03 / 03</span>
+                <i />
+                <span>Da escolha às chaves</span>
+              </div>
+              <p className="hero__chapter-title">
+                <span>Decisões seguras</span>
+                <span>começam com uma</span>
+                <span>conversa <em>clara</em></span>
+              </p>
+              <p className="hero__chapter-description">
+                Presença em cada etapa para transformar possibilidades em um
+                endereço que faça sentido
+              </p>
+            </div>
+          </div>
           <div className="hero__aside" aria-hidden="true">
             <span>Residencial</span>
             <strong>Escolhas com intenção</strong>

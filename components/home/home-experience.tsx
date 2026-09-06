@@ -24,7 +24,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
         heroVideo?.addEventListener("canplay", markVideoReady, { once: true });
       }
 
-      const setupVideoScrub = (pin: boolean) => {
+      const setupVideoScrub = (scrollDistance: number, scrub: number) => {
         if (!hero || !heroVideo) return;
 
         let scrollTimeline: gsap.core.Timeline | undefined;
@@ -71,12 +71,11 @@ export function HomeExperience({ children }: { children: ReactNode }) {
             scrollTrigger: {
               trigger: hero,
               start: "top top",
-              end: pin
-                ? () => `+=${Math.round(window.innerHeight * 1.35)}`
-                : "bottom top",
-              pin,
-              scrub: pin ? 0.85 : 0.55,
-              anticipatePin: pin ? 1 : 0,
+              end: () =>
+                `+=${Math.round(window.innerHeight * scrollDistance)}`,
+              pin: true,
+              scrub,
+              anticipatePin: 1,
               invalidateOnRefresh: true,
               onScrubComplete: queueSeek,
             },
@@ -98,18 +97,35 @@ export function HomeExperience({ children }: { children: ReactNode }) {
             )
             .to(
               ".hero__aside, .hero__scroll",
-              { autoAlpha: 0, duration: 0.28, ease: "none" },
-              0.34,
+              { autoAlpha: 0, duration: 0.12, ease: "none" },
+              0.08,
             )
             .to(
               ".hero__copy",
-              { yPercent: -10, autoAlpha: 0.38, duration: 0.45, ease: "none" },
-              0.55,
+              { yPercent: -8, autoAlpha: 0, duration: 0.16, ease: "none" },
+              0.14,
+            )
+            .fromTo(
+              ".hero__chapter--curation",
+              { y: 48, autoAlpha: 0 },
+              { y: 0, autoAlpha: 1, duration: 0.14, ease: "none" },
+              0.27,
+            )
+            .to(
+              ".hero__chapter--curation",
+              { y: -32, autoAlpha: 0, duration: 0.12, ease: "none" },
+              0.51,
+            )
+            .fromTo(
+              ".hero__chapter--confidence",
+              { y: 48, autoAlpha: 0 },
+              { y: 0, autoAlpha: 1, duration: 0.14, ease: "none" },
+              0.61,
             )
             .to(
               ".hero__shade",
-              { opacity: 0.78, duration: 0.45, ease: "none" },
-              0.55,
+              { opacity: 0.9, duration: 0.35, ease: "none" },
+              0.3,
             );
 
           ScrollTrigger.refresh();
@@ -227,12 +243,12 @@ export function HomeExperience({ children }: { children: ReactNode }) {
 
       media.add(
         "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-        () => setupVideoScrub(true),
+        () => setupVideoScrub(2.2, 0.85),
       );
 
       media.add(
         "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
-        () => setupVideoScrub(false),
+        () => setupVideoScrub(1.45, 0.65),
       );
 
       media.add("(prefers-reduced-motion: reduce)", () => {
@@ -242,6 +258,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
           ".hero__media, .hero__copy, [data-scroll-reveal], [data-parallax-media] img, [data-draw-line]",
           { clearProps: "all" },
         );
+        gsap.set(".hero__chapter", { clearProps: "all" });
       });
 
       return () => {

@@ -365,6 +365,70 @@ h3 {
   width: min(100%, 830px);
 }
 
+.hero__story {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hero__chapter {
+  grid-area: 1 / 1;
+  width: min(72%, 830px);
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.hero__chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #efe1d0;
+  font-size: 0.62rem;
+  font-weight: 760;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hero__chapter-meta i {
+  display: block;
+  width: clamp(32px, 4vw, 62px);
+  height: 1px;
+  background: var(--bronze-light);
+}
+
+.hero__chapter-title {
+  max-width: 11.5ch;
+  margin-top: 25px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(4.1rem, 7vw, 7.6rem);
+  font-weight: 500;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  text-shadow: 0 4px 34px rgb(0 0 0 / 0.22);
+}
+
+.hero__chapter-title em {
+  color: var(--bronze-light);
+  font-weight: 400;
+}
+
+.hero__chapter-title span {
+  display: block;
+}
+
+.hero__chapter-description {
+  max-width: 48ch;
+  margin-top: 30px;
+  color: rgb(255 250 242 / 0.76);
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
 .hero__copy h1 {
   max-width: 10.8ch;
   margin-top: 24px;
@@ -2278,6 +2342,10 @@ h3 {
     width: min(100%, 720px);
   }
 
+  .hero__chapter {
+    width: min(100%, 720px);
+  }
+
   .hero__copy h1 {
     font-size: clamp(4.2rem, 10vw, 6.2rem);
   }
@@ -2368,6 +2436,30 @@ h3 {
   .hero__copy {
     width: 100%;
     padding: 0;
+  }
+
+  .hero__story {
+    inset: auto 0 78px;
+    align-items: end;
+    height: min(70vh, 560px);
+  }
+
+  .hero__chapter {
+    width: 100%;
+  }
+
+  .hero__chapter-title {
+    max-width: 11ch;
+    margin-top: 20px;
+    font-size: clamp(3.15rem, 13.5vw, 4.7rem);
+    line-height: 0.88;
+  }
+
+  .hero__chapter-description {
+    max-width: 38ch;
+    margin-top: 24px;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   .hero__copy h1 {
@@ -2696,5 +2788,9 @@ h3 {
 
   .hero__poster {
     opacity: 1 !important;
+  }
+
+  .hero__story {
+    display: none;
   }
 }
