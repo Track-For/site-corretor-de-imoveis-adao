@@ -9,6 +9,7 @@ import {
   MapPin,
   WhatsappLogo,
 } from "@phosphor-icons/react/dist/ssr";
+import { HomeExperience } from "@/components/home/home-experience";
 import { Reveal } from "@/components/motion/reveal";
 import {
   PropertyMarquee,
@@ -88,7 +89,7 @@ export default async function HomePage() {
   ]);
   const cities = [...new Set(allProperties.map((property) => property.city))];
   const marqueeSource: PropertyMarqueeItem[] = allProperties.flatMap((property) =>
-    property.images.map((image, index) => ({
+    property.images.filter((image) => image.trim().length > 0).map((image, index) => ({
       id: `${property.id}-${index}`,
       title: property.title,
       meta: `${purposeLabels[property.purpose]} · ${propertyTypeLabels[property.propertyType]}`,
@@ -145,13 +146,31 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <section className="hero">
+      <HomeExperience>
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero__media" data-parallax-media>
+          <Image
+            src="/images/hero-casa-conceitual.webp"
+            alt="Residência contemporânea cercada por paisagismo"
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
+        <div className="hero__shade" aria-hidden="true" />
         <div className="hero__content shell">
           <div className="hero__copy">
-            <p className="eyebrow">{broker.creci}</p>
-            <h1>Imóveis escolhidos para decidir bem.</h1>
-            <p>
-              Compra, venda e locação com atendimento direto de Adão.
+            <p className="eyebrow hero__eyebrow">
+              <span aria-hidden="true" /> Curadoria imobiliária em Goiás
+            </p>
+            <h1 id="hero-title">
+              <span className="hero__title-line">Onde o próximo</span>
+              <span className="hero__title-line"><em>capítulo</em> ganha</span>
+              <span className="hero__title-line">endereço.</span>
+            </h1>
+            <p className="hero__description">
+              Para comprar, vender ou alugar com clareza, repertório local e
+              uma conversa direta do primeiro contato às chaves.
             </p>
             <div className="hero__actions">
               <Link
@@ -174,24 +193,30 @@ export default async function HomePage() {
                 Falar com Adão
               </a>
             </div>
+            <div className="hero__trust" aria-label="Informações profissionais">
+              <span>Atendimento pessoal</span>
+              <span>{broker.address.city}</span>
+              <span>{broker.creci}</span>
+            </div>
+          </div>
+          <div className="hero__aside" aria-hidden="true">
+            <span>Residencial</span>
+            <strong>Escolhas com intenção</strong>
+            <small>Goiás · Brasil</small>
           </div>
         </div>
-        <div className="hero__media">
-          <Image
-            src="/images/hero-casa-conceitual.webp"
-            alt="Casa contemporânea usada como imagem conceitual do site"
-            fill
-            priority
-            sizes="(max-width: 767px) 100vw, 58vw"
-          />
+        <div className="hero__scroll" aria-hidden="true">
+          <span>Explore</span>
+          <i />
         </div>
       </section>
 
       <section className="search-band" aria-labelledby="search-title">
         <div className="shell">
           <div className="search-band__heading">
-            <h2 id="search-title">Encontre por finalidade</h2>
-            <p>Use os filtros essenciais e refine a busca no catálogo.</p>
+            <p className="eyebrow">Busca personalizada</p>
+            <h2 id="search-title">Comece pelo que importa</h2>
+            <p>Escolha os critérios principais. O catálogo faz o restante.</p>
           </div>
           <QuickSearch cities={cities} />
         </div>
@@ -203,10 +228,12 @@ export default async function HomePage() {
         <div className="shell">
           <Reveal>
             <div className="section-heading section-heading--stacked">
-              <h2 id="featured-title">Imóveis em destaque</h2>
+              <p className="eyebrow">Seleção em destaque</p>
+              <div className="section-heading__rule" data-draw-line aria-hidden="true" />
+              <h2 id="featured-title">Espaços que merecem ser vistos com calma.</h2>
               <p>
-                Conteúdo demonstrativo para validar a experiência. Fotos, dados
-                e valores serão substituídos pelos cadastros do Supabase.
+                Uma curadoria de imóveis para diferentes rotinas, momentos e
+                formas de viver.
               </p>
             </div>
           </Reveal>
@@ -234,7 +261,7 @@ export default async function HomePage() {
           )}
 
           <Link href="/imoveis" className="text-link text-link--large">
-            Ver catálogo completo
+            Explorar todos os imóveis
             <ArrowRight size={20} aria-hidden="true" />
           </Link>
         </div>
@@ -244,7 +271,7 @@ export default async function HomePage() {
         <div className="shell broker-grid">
           <Reveal>
             <figure className="broker-portrait">
-              <div className="broker-portrait__image">
+              <div className="broker-portrait__image" data-parallax-media>
                 <Image
                   src="/images/corretor-placeholder.webp"
                   alt="Modelo fictício usado temporariamente no lugar da foto profissional de Adão"
@@ -252,16 +279,27 @@ export default async function HomePage() {
                   sizes="(max-width: 767px) 100vw, 42vw"
                 />
               </div>
-              <figcaption>Foto provisória com modelo fictício</figcaption>
+              <div className="broker-portrait__detail" data-parallax-media>
+                <Image
+                  src="/images/apartamento-interior-conceitual.webp"
+                  alt="Interior de apartamento contemporâneo"
+                  fill
+                  sizes="(max-width: 767px) 42vw, 18vw"
+                />
+              </div>
+              <figcaption>
+                Imagem provisória com modelo fictício — substituir pela foto oficial
+              </figcaption>
             </figure>
           </Reveal>
 
           <Reveal className="broker-copy">
-            <p className="eyebrow">Quem vai acompanhar você</p>
-            <h2 id="broker-title">Conversa direta com o corretor.</h2>
+            <p className="eyebrow">Presença em cada etapa</p>
+            <div className="section-heading__rule" data-draw-line aria-hidden="true" />
+            <h2 id="broker-title">Uma escolha importante pede atenção de verdade.</h2>
             <p className="broker-copy__lead">
-              Adão de Souza Dourado atua em compra, venda e locação de imóveis,
-              com atendimento próximo em cada etapa da negociação.
+              Adão de Souza Dourado acompanha compras, vendas e locações com
+              proximidade, informação clara e disponibilidade para conversar.
             </p>
             <dl className="broker-facts">
               <div>
@@ -278,7 +316,7 @@ export default async function HomePage() {
               </div>
             </dl>
             <Link href="/sobre" className="button button--secondary">
-              Conhecer Adão
+              Conheça o atendimento
               <ArrowRight size={19} aria-hidden="true" />
             </Link>
           </Reveal>
@@ -289,15 +327,20 @@ export default async function HomePage() {
         <div className="shell">
           <Reveal>
             <div className="section-heading section-heading--stacked">
-              <h2 id="services-title">Um atendimento para cada objetivo</h2>
-              <p>O catálogo se organiza por finalidade e tipo de imóvel.</p>
+              <p className="eyebrow">Como posso ajudar</p>
+              <div className="section-heading__rule" data-draw-line aria-hidden="true" />
+              <h2 id="services-title">Estratégia para cada movimento imobiliário.</h2>
+              <p>Do primeiro filtro à negociação, cada etapa tem um propósito.</p>
             </div>
           </Reveal>
           <div className="services-list">
-            {services.map((service) => {
+            {services.map((service, index) => {
               const Icon = service.icon;
               return (
                 <Reveal key={service.title} className="service-item">
+                  <span className="service-item__number" aria-hidden="true">
+                    0{index + 1}
+                  </span>
                   <Icon size={27} weight="duotone" aria-hidden="true" />
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
@@ -309,26 +352,36 @@ export default async function HomePage() {
       </section>
 
       <section className="section catalog-paths" aria-labelledby="catalog-title">
-        <div className="shell">
+        <div className="catalog-paths__media" data-parallax-media aria-hidden="true">
+          <Image
+            src="/images/edificio-conceitual.webp"
+            alt=""
+            fill
+            sizes="100vw"
+          />
+        </div>
+        <div className="shell catalog-paths__content">
           <Reveal className="catalog-paths__intro">
-            <h2 id="catalog-title">Entre pelo catálogo certo</h2>
+            <p className="eyebrow">Encontre o seu caminho</p>
+            <div className="section-heading__rule" data-draw-line aria-hidden="true" />
+            <h2 id="catalog-title">Três formas de começar.</h2>
             <p>
-              Finalidade e tipo permanecem registrados na URL. Assim, a busca
-              pode ser compartilhada e retomada depois.
+              Escolha a intenção que melhor descreve o seu momento. A conversa
+              continua a partir daí.
             </p>
           </Reveal>
           <div className="catalog-paths__grid">
-            <Link href="/imoveis?finalidade=sale" data-track="view_property_list">
+            <Link href="/imoveis?finalidade=sale" data-track="view_property_list" data-scroll-reveal>
               <span>Para comprar</span>
               <strong>Casas, apartamentos, terrenos e imóveis comerciais</strong>
               <ArrowRight size={24} aria-hidden="true" />
             </Link>
-            <Link href="/imoveis?finalidade=rent" data-track="view_property_list">
+            <Link href="/imoveis?finalidade=rent" data-track="view_property_list" data-scroll-reveal>
               <span>Para alugar</span>
               <strong>Opções residenciais e comerciais para sua rotina</strong>
               <ArrowRight size={24} aria-hidden="true" />
             </Link>
-            <Link href="/contato?assunto=venda" data-track="sell_property_lead">
+            <Link href="/contato?assunto=venda" data-track="sell_property_lead" data-scroll-reveal>
               <span>Para anunciar</span>
               <strong>Converse sobre a venda ou locação do seu imóvel</strong>
               <ArrowRight size={24} aria-hidden="true" />
@@ -340,20 +393,23 @@ export default async function HomePage() {
       <section className="section local-section" aria-labelledby="local-title">
         <div className="shell local-grid">
           <Reveal className="local-copy">
-            <MapPin size={32} weight="duotone" aria-hidden="true" />
-            <h2 id="local-title">Base local, atendimento sob consulta.</h2>
+            <p className="eyebrow">Conhecimento local</p>
+            <MapPin size={28} weight="duotone" aria-hidden="true" />
+            <h2 id="local-title">Perto o bastante para entender cada detalhe.</h2>
             <p>{broker.serviceArea}</p>
             <address>
               {broker.address.city}, {broker.address.state}
             </address>
           </Reveal>
           <Reveal className="local-image">
-            <Image
-              src="/images/edificio-conceitual.webp"
-              alt="Edifício residencial contemporâneo usado como imagem conceitual"
-              fill
-              sizes="(max-width: 767px) 100vw, 52vw"
-            />
+            <div className="local-image__media" data-parallax-media>
+              <Image
+                src="/images/casa-piscina-conceitual.webp"
+                alt="Casa contemporânea com piscina e jardim"
+                fill
+                sizes="(max-width: 767px) 100vw, 52vw"
+              />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -361,12 +417,13 @@ export default async function HomePage() {
       <section className="section faq-section" aria-labelledby="faq-title">
         <div className="shell faq-grid">
           <Reveal className="faq-intro">
-            <h2 id="faq-title">Perguntas antes da primeira conversa</h2>
-            <p>Respostas diretas sobre busca, anúncio e atendimento.</p>
+            <p className="eyebrow">Antes de conversar</p>
+            <h2 id="faq-title">Perguntas que ajudam a dar o primeiro passo.</h2>
+            <p>Respostas objetivas sobre busca, anúncio e atendimento.</p>
           </Reveal>
           <div className="faq-list">
             {faqs.map((item) => (
-              <details key={item.question}>
+              <details key={item.question} data-scroll-reveal>
                 <summary>{item.question}</summary>
                 <p>{item.answer}</p>
               </details>
@@ -378,11 +435,11 @@ export default async function HomePage() {
       <section className="section contact-section" id="contato" aria-labelledby="contact-title">
         <div className="shell">
           <Reveal className="contact-intro">
-            <p className="eyebrow">Vamos conversar</p>
-            <h2 id="contact-title">Qual é o imóvel que faz sentido agora?</h2>
+            <p className="eyebrow">Uma conversa, sem compromisso</p>
+            <h2 id="contact-title">Seu próximo endereço pode começar aqui.</h2>
             <p>
-              Conte o que você procura ou deseja anunciar. Adão responde pelos
-              canais informados no site.
+              Conte o que você procura — ou o que deseja anunciar. Adão responde
+              pessoalmente e ajuda a organizar os próximos passos.
             </p>
             <a
               href={buildGeneralWhatsAppUrl()}
@@ -393,11 +450,12 @@ export default async function HomePage() {
               data-destination="contact_section"
             >
               <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
-                Falar com Adão
+                Iniciar conversa
             </a>
           </Reveal>
         </div>
       </section>
+      </HomeExperience>
     </main>
   );
 }

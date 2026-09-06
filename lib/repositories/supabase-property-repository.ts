@@ -18,7 +18,7 @@ interface SupabaseRow {
   status: PropertyStatus;
   price: number;
   city: string;
-  images?: string[];
+  images?: Array<string | null>;
   created_at: string;
   updated_at: string;
 }
@@ -34,7 +34,10 @@ function fromRow(row: SupabaseRow): Property {
     status: row.status,
     price: Number(row.price),
     city: row.city,
-    images: row.images || [],
+    images: (row.images || []).filter(
+      (image): image is string =>
+        typeof image === "string" && image.trim().length > 0,
+    ),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };

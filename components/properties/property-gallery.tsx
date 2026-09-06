@@ -12,6 +12,7 @@ export function PropertyGallery({
   title: string;
 }) {
   const [open, setOpen] = useState(false);
+  const validImages = images.filter((image) => image.trim().length > 0);
 
   useEffect(() => {
     if (!open) return;
@@ -28,14 +29,14 @@ export function PropertyGallery({
     };
   }, [open]);
 
-  if (!images.length) {
+  if (!validImages.length) {
     return <div className="gallery-empty">Fotos indisponíveis</div>;
   }
 
   return (
     <>
       <div className="property-gallery">
-        {images.slice(0, 3).map((image, index) => (
+        {validImages.slice(0, 3).map((image, index) => (
           <button
             type="button"
             key={image}
@@ -74,7 +75,7 @@ export function PropertyGallery({
             <X size={24} />
           </button>
           <div className="gallery-modal__track">
-            {images.map((image, index) => (
+            {validImages.map((image, index) => (
               <div className="gallery-modal__image" key={image}>
                 <Image
                   src={image}

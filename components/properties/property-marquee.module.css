@@ -1,8 +1,9 @@
 .showcase {
   overflow: clip;
-  padding-block: clamp(78px, 9vw, 128px);
-  border-block: 1px solid var(--line);
-  background: var(--surface);
+  padding-block: clamp(92px, 10vw, 148px);
+  border-block: 1px solid rgb(255 250 242 / 0.08);
+  background: var(--charcoal);
+  color: #fffaf2;
 }
 
 .heading {
@@ -21,12 +22,16 @@
 
 .headingCopy p:last-child {
   max-width: 58ch;
-  color: var(--text-soft);
+  color: rgb(255 250 242 / 0.58);
+}
+
+.headingCopy :global(.eyebrow) {
+  color: var(--bronze-light);
 }
 
 .directionNote {
   flex: 0 0 auto;
-  color: var(--text-soft);
+  color: rgb(255 250 242 / 0.5);
   font-size: 0.76rem;
   font-weight: 760;
   letter-spacing: 0.1em;
@@ -53,7 +58,7 @@
   height: clamp(190px, 22vw, 330px);
   flex: 0 0 auto;
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: 1px;
   background: var(--surface-raised);
   isolation: isolate;
 }
@@ -97,9 +102,11 @@
 
 .caption strong {
   max-width: 28ch;
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.25rem, 1.8vw, 1.7rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 
 @media (max-width: 767px) {

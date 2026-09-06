@@ -18,8 +18,9 @@ export function PropertyCard({
   priority?: boolean;
   featured?: boolean;
 }) {
-  const primaryImage = property.images[0];
-  const hoverImage = property.images[1] || primaryImage;
+  const validImages = property.images.filter((image) => image.trim().length > 0);
+  const primaryImage = validImages[0];
+  const hoverImage = validImages[1] || primaryImage;
 
   return (
     <article className={`property-card ${featured ? "property-card--featured" : ""}`}>

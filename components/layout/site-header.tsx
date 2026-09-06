@@ -24,11 +24,11 @@ export function SiteHeader() {
       <div className="site-header__inner shell">
         <Link href="/" className="brand" onClick={() => setOpen(false)}>
           <span className="brand__monogram" aria-hidden="true">
-            A
+            AD
           </span>
           <span className="brand__name">
             Adão
-            <small>Corretor de Imóveis</small>
+            <small>Consultoria imobiliária</small>
           </span>
         </Link>
 
@@ -53,7 +53,7 @@ export function SiteHeader() {
           data-destination="header"
         >
           <WhatsappLogo size={18} weight="bold" aria-hidden="true" />
-          Falar com Adão
+          Atendimento
         </a>
 
         <button
