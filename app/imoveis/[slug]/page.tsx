@@ -19,11 +19,6 @@ import { buildPropertyWhatsAppUrl } from "@/lib/utils/whatsapp";
 
 export const revalidate = 300;
 
-export async function generateStaticParams() {
-  const properties = await getProperties();
-  return properties.map((property) => ({ slug: property.slug }));
-}
-
 export async function generateMetadata({
   params,
 }: {

@@ -80,6 +80,7 @@ export class SupabasePropertyRepository implements PropertyRepository {
         ...init?.headers,
       },
       next: { revalidate: 300, tags: ["properties"] },
+      signal: AbortSignal.timeout(10000),
     });
 
     if (!response.ok) {
