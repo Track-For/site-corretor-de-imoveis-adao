@@ -13,7 +13,7 @@ export const broker = {
     country: "BR",
   },
   serviceArea:
-    "Base em Aparecida de Goiânia, com atendimento para outras regiões sob consulta.",
+    "Base em Aparecida de Goiânia, com atendimento para outras regiões sob consulta",
 } as const;
 
 export const siteUrl =

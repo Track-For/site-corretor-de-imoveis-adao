@@ -62,7 +62,7 @@ export default async function PropertiesPage({
           <h1>{titleParts.join(" ")}</h1>
           <p>
             Refine sua busca. Os filtros ficam na URL para você compartilhar ou
-            retomar quando quiser.
+            retomar quando quiser
           </p>
         </div>
       </section>

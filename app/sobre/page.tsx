@@ -21,10 +21,10 @@ export default function AboutPage() {
         <div className="shell about-hero__grid">
           <div className="about-hero__copy">
             <p className="eyebrow">{broker.creci}</p>
-            <h1>Conversa direta em cada decisão.</h1>
+            <h1>Conversa direta em cada decisão</h1>
             <p>
               Adão acompanha compradores, proprietários e locatários com atenção
-              às condições reais de cada negociação.
+              às condições reais de cada negociação
             </p>
           </div>
           <figure className="about-hero__figure">
@@ -49,23 +49,23 @@ export default function AboutPage() {
             <p>
               Em vez de um atendimento fragmentado, você conversa com o corretor
               responsável por entender a demanda, apresentar opções e acompanhar
-              os próximos passos.
+              os próximos passos
             </p>
             <p>
               O trabalho inclui imóveis residenciais, comerciais, terrenos e
-              propriedades rurais para compra, venda e locação.
+              propriedades rurais para compra, venda e locação
             </p>
           </div>
           <div className="about-principles">
             <div>
               <CheckCircle size={24} weight="duotone" aria-hidden="true" />
               <h3>Curadoria útil</h3>
-              <p>Opções alinhadas ao que foi conversado, sem excesso de ofertas.</p>
+              <p>Opções alinhadas ao que foi conversado, sem excesso de ofertas</p>
             </div>
             <div>
               <CheckCircle size={24} weight="duotone" aria-hidden="true" />
               <h3>Acompanhamento</h3>
-              <p>Contato presente na visita, negociação e encaminhamento documental.</p>
+              <p>Contato presente na visita, negociação e encaminhamento documental</p>
             </div>
             <div>
               <MapPin size={24} weight="duotone" aria-hidden="true" />

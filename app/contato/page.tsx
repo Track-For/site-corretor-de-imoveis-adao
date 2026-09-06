@@ -20,9 +20,9 @@ export default function ContactPage() {
       <section className="page-hero page-hero--contact">
         <div className="shell">
           <p className="eyebrow">Contato direto</p>
-          <h1>Vamos falar sobre imóveis.</h1>
+          <h1>Vamos falar sobre imóveis</h1>
           <p>
-            Escolha o canal mais conveniente. Para uma resposta rápida, use o WhatsApp.
+            Escolha o canal mais conveniente. Para uma resposta rápida, use o WhatsApp
           </p>
         </div>
       </section>

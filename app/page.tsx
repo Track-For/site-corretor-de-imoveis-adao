@@ -31,25 +31,25 @@ const services = [
   {
     title: "Compra",
     description:
-      "Seleção objetiva de imóveis de acordo com a sua rotina, orçamento e momento de vida.",
+      "Seleção objetiva de imóveis de acordo com a sua rotina, orçamento e momento de vida",
     icon: Key,
   },
   {
     title: "Venda",
     description:
-      "Posicionamento comercial, apresentação do imóvel e acompanhamento da negociação.",
+      "Posicionamento comercial, apresentação do imóvel e acompanhamento da negociação",
     icon: Handshake,
   },
   {
     title: "Locação",
     description:
-      "Apoio para encontrar ou anunciar imóveis residenciais e comerciais para aluguel.",
+      "Apoio para encontrar ou anunciar imóveis residenciais e comerciais para aluguel",
     icon: Buildings,
   },
   {
     title: "Imóveis diversos",
     description:
-      "Casas, apartamentos, terrenos, imóveis rurais e espaços comerciais em catálogos separados.",
+      "Casas, apartamentos, terrenos, imóveis rurais e espaços comerciais em catálogos separados",
     icon: House,
   },
 ];
@@ -150,12 +150,24 @@ export default async function HomePage() {
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero__media" data-parallax-media>
           <Image
-            src="/images/hero-casa-conceitual.webp"
+            src="/images/hero-video-poster.webp"
             alt="Residência contemporânea cercada por paisagismo"
             fill
             priority
             sizes="100vw"
+            className="hero__poster"
           />
+          <video
+            className="hero__video"
+            muted
+            playsInline
+            preload="auto"
+            poster="/images/hero-video-poster.webp"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <source src="/videos/hero-imoveis.mp4" type="video/mp4" />
+          </video>
         </div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__content shell">
@@ -166,11 +178,11 @@ export default async function HomePage() {
             <h1 id="hero-title">
               <span className="hero__title-line">Onde o próximo</span>
               <span className="hero__title-line"><em>capítulo</em> ganha</span>
-              <span className="hero__title-line">endereço.</span>
+              <span className="hero__title-line">endereço</span>
             </h1>
             <p className="hero__description">
               Para comprar, vender ou alugar com clareza, repertório local e
-              uma conversa direta do primeiro contato às chaves.
+              uma conversa direta do primeiro contato às chaves
             </p>
             <div className="hero__actions">
               <Link
@@ -230,10 +242,10 @@ export default async function HomePage() {
             <div className="section-heading section-heading--stacked">
               <p className="eyebrow">Seleção em destaque</p>
               <div className="section-heading__rule" data-draw-line aria-hidden="true" />
-              <h2 id="featured-title">Espaços que merecem ser vistos com calma.</h2>
+              <h2 id="featured-title">Espaços que merecem ser vistos com calma</h2>
               <p>
                 Uma curadoria de imóveis para diferentes rotinas, momentos e
-                formas de viver.
+                formas de viver
               </p>
             </div>
           </Reveal>
@@ -296,10 +308,10 @@ export default async function HomePage() {
           <Reveal className="broker-copy">
             <p className="eyebrow">Presença em cada etapa</p>
             <div className="section-heading__rule" data-draw-line aria-hidden="true" />
-            <h2 id="broker-title">Uma escolha importante pede atenção de verdade.</h2>
+            <h2 id="broker-title">Uma escolha importante pede atenção de verdade</h2>
             <p className="broker-copy__lead">
               Adão de Souza Dourado acompanha compras, vendas e locações com
-              proximidade, informação clara e disponibilidade para conversar.
+              proximidade, informação clara e disponibilidade para conversar
             </p>
             <dl className="broker-facts">
               <div>
@@ -329,8 +341,8 @@ export default async function HomePage() {
             <div className="section-heading section-heading--stacked">
               <p className="eyebrow">Como posso ajudar</p>
               <div className="section-heading__rule" data-draw-line aria-hidden="true" />
-              <h2 id="services-title">Estratégia para cada movimento imobiliário.</h2>
-              <p>Do primeiro filtro à negociação, cada etapa tem um propósito.</p>
+              <h2 id="services-title">Estratégia para cada movimento imobiliário</h2>
+              <p>Do primeiro filtro à negociação, cada etapa tem um propósito</p>
             </div>
           </Reveal>
           <div className="services-list">
@@ -364,10 +376,10 @@ export default async function HomePage() {
           <Reveal className="catalog-paths__intro">
             <p className="eyebrow">Encontre o seu caminho</p>
             <div className="section-heading__rule" data-draw-line aria-hidden="true" />
-            <h2 id="catalog-title">Três formas de começar.</h2>
+            <h2 id="catalog-title">Três formas de começar</h2>
             <p>
               Escolha a intenção que melhor descreve o seu momento. A conversa
-              continua a partir daí.
+              continua a partir daí
             </p>
           </Reveal>
           <div className="catalog-paths__grid">
@@ -395,7 +407,7 @@ export default async function HomePage() {
           <Reveal className="local-copy">
             <p className="eyebrow">Conhecimento local</p>
             <MapPin size={28} weight="duotone" aria-hidden="true" />
-            <h2 id="local-title">Perto o bastante para entender cada detalhe.</h2>
+            <h2 id="local-title">Perto o bastante para entender cada detalhe</h2>
             <p>{broker.serviceArea}</p>
             <address>
               {broker.address.city}, {broker.address.state}
@@ -418,8 +430,8 @@ export default async function HomePage() {
         <div className="shell faq-grid">
           <Reveal className="faq-intro">
             <p className="eyebrow">Antes de conversar</p>
-            <h2 id="faq-title">Perguntas que ajudam a dar o primeiro passo.</h2>
-            <p>Respostas objetivas sobre busca, anúncio e atendimento.</p>
+            <h2 id="faq-title">Perguntas que ajudam a dar o primeiro passo</h2>
+            <p>Respostas objetivas sobre busca, anúncio e atendimento</p>
           </Reveal>
           <div className="faq-list">
             {faqs.map((item) => (
@@ -436,7 +448,7 @@ export default async function HomePage() {
         <div className="shell">
           <Reveal className="contact-intro">
             <p className="eyebrow">Uma conversa, sem compromisso</p>
-            <h2 id="contact-title">Seu próximo endereço pode começar aqui.</h2>
+            <h2 id="contact-title">Seu próximo endereço pode começar aqui</h2>
             <p>
               Conte o que você procura — ou o que deseja anunciar. Adão responde
               pessoalmente e ajuda a organizar os próximos passos.

@@ -12,6 +12,127 @@ export function HomeExperience({ children }: { children: ReactNode }) {
       if (!root) return;
 
       const media = gsap.matchMedia();
+      const hero = root.querySelector<HTMLElement>(".hero");
+      const heroMedia = root.querySelector<HTMLElement>(".hero__media");
+      const heroVideo = root.querySelector<HTMLVideoElement>(".hero__video");
+
+      const markVideoReady = () => heroMedia?.classList.add("is-video-ready");
+
+      if (heroVideo?.readyState && heroVideo.readyState >= 2) {
+        markVideoReady();
+      } else {
+        heroVideo?.addEventListener("canplay", markVideoReady, { once: true });
+      }
+
+      const setupVideoScrub = (pin: boolean) => {
+        if (!hero || !heroVideo) return;
+
+        let scrollTimeline: gsap.core.Timeline | undefined;
+        let seekFrame: number | undefined;
+        let targetTime = 0;
+        const playhead = { time: 0 };
+        const frameStep = 1 / 30;
+
+        const commitSeek = () => {
+          seekFrame = undefined;
+
+          if (
+            heroVideo.seeking ||
+            Math.abs(heroVideo.currentTime - targetTime) < frameStep
+          ) {
+            return;
+          }
+
+          heroVideo.currentTime = targetTime;
+        };
+
+        const queueSeek = () => {
+          if (seekFrame === undefined) {
+            seekFrame = window.requestAnimationFrame(commitSeek);
+          }
+        };
+
+        const onSeeked = () => queueSeek();
+        heroVideo.addEventListener("seeked", onSeeked);
+
+        const createTimeline = () => {
+          if (
+            scrollTimeline ||
+            !Number.isFinite(heroVideo.duration) ||
+            heroVideo.duration <= 0
+          ) {
+            return;
+          }
+
+          heroVideo.pause();
+          heroVideo.currentTime = 0;
+
+          scrollTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: hero,
+              start: "top top",
+              end: pin
+                ? () => `+=${Math.round(window.innerHeight * 1.35)}`
+                : "bottom top",
+              pin,
+              scrub: pin ? 0.85 : 0.55,
+              anticipatePin: pin ? 1 : 0,
+              invalidateOnRefresh: true,
+              onScrubComplete: queueSeek,
+            },
+          });
+
+          scrollTimeline
+            .to(
+              playhead,
+              {
+                time: Math.max(0, heroVideo.duration - 0.08),
+                duration: 1,
+                ease: "none",
+                onUpdate: () => {
+                  targetTime = playhead.time;
+                  queueSeek();
+                },
+              },
+              0,
+            )
+            .to(
+              ".hero__aside, .hero__scroll",
+              { autoAlpha: 0, duration: 0.28, ease: "none" },
+              0.34,
+            )
+            .to(
+              ".hero__copy",
+              { yPercent: -10, autoAlpha: 0.38, duration: 0.45, ease: "none" },
+              0.55,
+            )
+            .to(
+              ".hero__shade",
+              { opacity: 0.78, duration: 0.45, ease: "none" },
+              0.55,
+            );
+
+          ScrollTrigger.refresh();
+        };
+
+        if (heroVideo.readyState >= 1) {
+          createTimeline();
+        } else {
+          heroVideo.addEventListener("loadedmetadata", createTimeline, {
+            once: true,
+          });
+        }
+
+        return () => {
+          heroVideo.removeEventListener("loadedmetadata", createTimeline);
+          heroVideo.removeEventListener("seeked", onSeeked);
+          if (seekFrame !== undefined) {
+            window.cancelAnimationFrame(seekFrame);
+          }
+          scrollTimeline?.scrollTrigger?.kill();
+          scrollTimeline?.kill();
+        };
+      };
 
       media.add("(prefers-reduced-motion: no-preference)", () => {
         const heroTimeline = gsap.timeline({
@@ -20,7 +141,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
 
         heroTimeline
           .fromTo(
-            ".hero__media img",
+            ".hero__media",
             { scale: 1.12 },
             { scale: 1.04, duration: 1.8, ease: "power2.out" },
           )
@@ -44,29 +165,6 @@ export function HomeExperience({ children }: { children: ReactNode }) {
             { autoAlpha: 0, duration: 0.7 },
             "-=0.55",
           );
-
-        gsap.to(".hero__media img", {
-          yPercent: 6,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.8,
-          },
-        });
-
-        gsap.to(".hero__copy", {
-          yPercent: -10,
-          autoAlpha: 0.45,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom 20%",
-            scrub: 0.7,
-          },
-        });
 
         gsap.utils
           .toArray<HTMLElement>("[data-scroll-reveal]")
@@ -127,14 +225,29 @@ export function HomeExperience({ children }: { children: ReactNode }) {
           });
       });
 
+      media.add(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        () => setupVideoScrub(true),
+      );
+
+      media.add(
+        "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
+        () => setupVideoScrub(false),
+      );
+
       media.add("(prefers-reduced-motion: reduce)", () => {
+        heroVideo?.pause();
+        if (heroVideo) heroVideo.currentTime = 0;
         gsap.set(
-          ".hero__media img, .hero__copy, [data-scroll-reveal], [data-parallax-media] img, [data-draw-line]",
+          ".hero__media, .hero__copy, [data-scroll-reveal], [data-parallax-media] img, [data-draw-line]",
           { clearProps: "all" },
         );
       });
 
-      return () => media.revert();
+      return () => {
+        heroVideo?.removeEventListener("canplay", markVideoReady);
+        media.revert();
+      };
     },
     { scope: rootRef },
   );

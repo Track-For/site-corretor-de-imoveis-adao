@@ -129,10 +129,10 @@ export function PropertyMarquee({ items }: { items: PropertyMarqueeItem[] }) {
       <div className={`shell ${styles.heading}`}>
         <div className={styles.headingCopy}>
           <p className="eyebrow">Vitrine em movimento</p>
-          <h2 id="moving-showcase-title">Explore cada espaço por um novo ângulo.</h2>
+          <h2 id="moving-showcase-title">Explore cada espaço por um novo ângulo</h2>
           <p>
             Duas faixas apresentam os imóveis em sentidos opostos enquanto você
-            percorre a página.
+            percorre a página
           </p>
         </div>
         <p className={styles.directionNote} aria-hidden="true">

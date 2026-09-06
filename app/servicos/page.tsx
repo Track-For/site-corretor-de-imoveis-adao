@@ -21,7 +21,7 @@ const services = [
     icon: Key,
     title: "Compra de imóveis",
     description:
-      "Definição de prioridades, seleção de opções, organização de visitas e apoio na negociação.",
+      "Definição de prioridades, seleção de opções, organização de visitas e apoio na negociação",
     href: "/imoveis?finalidade=sale",
     link: "Ver imóveis à venda",
   },
@@ -29,7 +29,7 @@ const services = [
     icon: Handshake,
     title: "Venda de imóveis",
     description:
-      "Leitura comercial, preparação do cadastro, apresentação e acompanhamento dos interessados.",
+      "Leitura comercial, preparação do cadastro, apresentação e acompanhamento dos interessados",
     href: "/contato?assunto=venda",
     link: "Quero anunciar",
   },
@@ -37,7 +37,7 @@ const services = [
     icon: HouseLine,
     title: "Locação",
     description:
-      "Busca e divulgação de imóveis residenciais ou comerciais para aluguel.",
+      "Busca e divulgação de imóveis residenciais ou comerciais para aluguel",
     href: "/imoveis?finalidade=rent",
     link: "Ver imóveis para alugar",
   },
@@ -45,7 +45,7 @@ const services = [
     icon: Buildings,
     title: "Catálogos por tipo",
     description:
-      "Apartamentos, casas, espaços comerciais, terrenos e imóveis rurais em jornadas separadas.",
+      "Apartamentos, casas, espaços comerciais, terrenos e imóveis rurais em jornadas separadas",
     href: "/imoveis",
     link: "Explorar o catálogo",
   },
@@ -53,7 +53,7 @@ const services = [
     icon: MapTrifold,
     title: "Atendimento regional",
     description:
-      "A base fica em Aparecida de Goiânia. Demais regiões são avaliadas conforme a demanda.",
+      "A base fica em Aparecida de Goiânia. Demais regiões são avaliadas conforme a demanda",
     href: "/contato",
     link: "Consultar atendimento",
   },
@@ -65,9 +65,9 @@ export default function ServicesPage() {
       <section className="page-hero">
         <div className="shell">
           <p className="eyebrow">Serviços</p>
-          <h1>Seu objetivo, bem acompanhado.</h1>
+          <h1>Seu objetivo, bem acompanhado</h1>
           <p>
-            Atendimento para comprar, vender ou alugar diferentes tipos de imóvel.
+            Atendimento para comprar, vender ou alugar diferentes tipos de imóvel
           </p>
         </div>
       </section>
