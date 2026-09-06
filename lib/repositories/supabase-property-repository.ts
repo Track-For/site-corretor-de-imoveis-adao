@@ -57,12 +57,12 @@ export class SupabasePropertyRepository implements PropertyRepository {
   private readonly publicKey: string;
 
   constructor() {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const url = process.env.SUPABASE_URL;
     const publicKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     if (!url || !publicKey) {
       throw new Error(
-        "Configure NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+        "Configure SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY.",
       );
     }
 

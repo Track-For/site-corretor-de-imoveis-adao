@@ -34,7 +34,7 @@ Para conectar o Supabase:
 6. Defina `PROPERTY_DATA_SOURCE=supabase`.
 
 O `next.config.ts` autoriza imagens remotas apenas no caminho público de
-Storage do projeto definido em `NEXT_PUBLIC_SUPABASE_URL`.
+Storage do projeto definido em `SUPABASE_URL`.
 
 O cliente administra os registros pelo painel do Supabase. Não há rota `/admin`
 nem login no site. A service role é usada apenas pela rota de leads no servidor
