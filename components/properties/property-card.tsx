@@ -1,12 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Bathtub,
-  Bed,
-  Car,
-  Ruler,
-} from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import type { Property } from "@/lib/domain/property";
 import {
   formatCurrency,
@@ -33,7 +27,6 @@ export function PropertyCard({
         href={`/imoveis/${property.slug}`}
         className="property-card__media"
         data-track="select_property"
-        data-property-code={property.code}
       >
         {primaryImage ? (
           <>
@@ -64,7 +57,6 @@ export function PropertyCard({
           <span>{purposeLabels[property.purpose]}</span>
           <span>{propertyTypeLabels[property.propertyType]}</span>
           <span>{statusLabels[property.status]}</span>
-          {property.isDemo && <span>Demonstrativo</span>}
         </div>
 
         <Link href={`/imoveis/${property.slug}`} className="property-card__title">
@@ -72,41 +64,11 @@ export function PropertyCard({
           <ArrowUpRight size={22} aria-hidden="true" />
         </Link>
 
-        <p className="property-card__location">
-          {property.neighborhood && `${property.neighborhood}, `}
-          {property.city}
-        </p>
+        <p className="property-card__location">{property.city}</p>
 
         <strong className="property-card__price">
           {formatCurrency(property.price, property.purpose)}
         </strong>
-
-        <div className="property-card__features" aria-label="Características">
-          {property.bedrooms !== undefined && (
-            <span title="Quartos">
-              <Bed size={18} aria-hidden="true" />
-              {property.bedrooms} quartos
-            </span>
-          )}
-          {property.bathrooms !== undefined && (
-            <span title="Banheiros">
-              <Bathtub size={18} aria-hidden="true" />
-              {property.bathrooms} banheiros
-            </span>
-          )}
-          {property.parkingSpaces !== undefined && (
-            <span title="Vagas">
-              <Car size={18} aria-hidden="true" />
-              {property.parkingSpaces} vagas
-            </span>
-          )}
-          {property.area !== undefined && (
-            <span title="Área">
-              <Ruler size={18} aria-hidden="true" />
-              {property.area} m²
-            </span>
-          )}
-        </div>
       </div>
     </article>
   );

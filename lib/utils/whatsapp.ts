@@ -7,7 +7,7 @@ export function buildWhatsAppUrl(message: string) {
 
 export function buildPropertyWhatsAppUrl(property: Property) {
   return buildWhatsAppUrl(
-    `Olá, tenho interesse no imóvel ${property.title}, código ${property.code}. Gostaria de receber mais informações.`,
+    `Olá, tenho interesse no imóvel ${property.title}. Gostaria de receber mais informações.`,
   );
 }
 

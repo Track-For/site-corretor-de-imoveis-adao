@@ -5,7 +5,6 @@ import {
   Phone,
   WhatsappLogo,
 } from "@phosphor-icons/react/dist/ssr";
-import { ContactForm } from "@/components/contact/contact-form";
 import { broker } from "@/lib/config/broker";
 import { buildGeneralWhatsAppUrl } from "@/lib/utils/whatsapp";
 
@@ -29,7 +28,7 @@ export default function ContactPage() {
       </section>
 
       <section className="section">
-        <div className="shell contact-page-grid">
+        <div className="shell">
           <div className="contact-options">
             <a
               href={buildGeneralWhatsAppUrl()}
@@ -61,15 +60,6 @@ export default function ContactPage() {
                 {broker.address.city}, {broker.address.state}
               </address>
             </div>
-          </div>
-
-          <div className="contact-form-panel">
-            <h2>Envie uma mensagem</h2>
-            <p>
-              O formulário será ativado quando o armazenamento de leads estiver
-              conectado ao Supabase. Os demais canais já estão disponíveis.
-            </p>
-            <ContactForm />
           </div>
         </div>
       </section>

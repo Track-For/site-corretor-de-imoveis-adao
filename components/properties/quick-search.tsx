@@ -36,17 +36,6 @@ export function QuickSearch({ cities }: { cities: string[] }) {
         </select>
       </div>
 
-      <div className="field">
-        <label htmlFor="home-bedrooms">Quartos</label>
-        <select id="home-bedrooms" name="quartos" defaultValue="">
-          <option value="">Qualquer quantidade</option>
-          <option value="1">1 ou mais</option>
-          <option value="2">2 ou mais</option>
-          <option value="3">3 ou mais</option>
-          <option value="4">4 ou mais</option>
-        </select>
-      </div>
-
       <button
         type="submit"
         className="button button--primary quick-search__button"

@@ -31,7 +31,3 @@ export async function getPropertyBySlug(slug: string) {
 export async function getPropertiesByCity(city: string) {
   return getPropertyRepository().getPropertiesByCity(city);
 }
-
-export async function getPropertiesByNeighborhood(neighborhood: string) {
-  return getPropertyRepository().getPropertiesByNeighborhood(neighborhood);
-}

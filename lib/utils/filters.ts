@@ -34,17 +34,8 @@ export function parsePropertyFilters(
       ? (propertyType as PropertyType)
       : undefined,
     city: first(searchParams.cidade) || undefined,
-    neighborhood: first(searchParams.bairro) || undefined,
     minPrice: positiveNumber(first(searchParams.precoMin)),
     maxPrice: positiveNumber(first(searchParams.precoMax)),
-    bedrooms: positiveNumber(first(searchParams.quartos)),
-    suites: positiveNumber(first(searchParams.suites)),
-    parkingSpaces: positiveNumber(first(searchParams.vagas)),
-    minArea: positiveNumber(first(searchParams.area)),
-    furnished:
-      first(searchParams.mobiliado) === "true" ? true : undefined,
-    isDevelopment:
-      first(searchParams.lancamento) === "true" ? true : undefined,
     status: ["available", "reserved", "sold", "rented"].includes(status || "")
       ? (status as PropertyStatus)
       : undefined,

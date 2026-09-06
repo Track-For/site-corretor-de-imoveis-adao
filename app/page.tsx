@@ -9,7 +9,6 @@ import {
   MapPin,
   WhatsappLogo,
 } from "@phosphor-icons/react/dist/ssr";
-import { ContactForm } from "@/components/contact/contact-form";
 import { Reveal } from "@/components/motion/reveal";
 import {
   PropertyMarquee,
@@ -377,7 +376,7 @@ export default async function HomePage() {
       </section>
 
       <section className="section contact-section" id="contato" aria-labelledby="contact-title">
-        <div className="shell contact-grid">
+        <div className="shell">
           <Reveal className="contact-intro">
             <p className="eyebrow">Vamos conversar</p>
             <h2 id="contact-title">Qual é o imóvel que faz sentido agora?</h2>
@@ -396,9 +395,6 @@ export default async function HomePage() {
               <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
                 Falar com Adão
             </a>
-          </Reveal>
-          <Reveal>
-            <ContactForm />
           </Reveal>
         </div>
       </section>

@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  Bathtub,
-  Bed,
-  Buildings,
-  Car,
-  Check,
-  MapPin,
-  Ruler,
-  WhatsappLogo,
-} from "@phosphor-icons/react/dist/ssr";
-import { ContactForm } from "@/components/contact/contact-form";
+import { ArrowLeft, MapPin, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { PropertyCard } from "@/components/properties/property-card";
 import { PropertyGallery } from "@/components/properties/property-gallery";
 import { broker, siteUrl } from "@/lib/config/broker";
@@ -45,7 +34,7 @@ export async function generateMetadata({
   if (!property) return { title: "Imóvel não encontrado" };
 
   const title = `${property.title} em ${property.city}`;
-  const description = `${propertyTypeLabels[property.propertyType]} para ${purposeLabels[property.purpose].toLowerCase()} em ${property.city}. ${property.bedrooms ? `${property.bedrooms} quartos, ` : ""}${property.area ? `${property.area} m².` : ""}`;
+  const description = `${propertyTypeLabels[property.propertyType]} para ${purposeLabels[property.purpose].toLowerCase()} em ${property.city}.`;
 
   return {
     title,
@@ -99,12 +88,8 @@ export default async function PropertyPage({
     address: {
       "@type": "PostalAddress",
       addressLocality: property.city,
-      addressRegion: property.state,
       addressCountry: "BR",
     },
-    floorSize: property.area
-      ? { "@type": "QuantitativeValue", value: property.area, unitCode: "MTK" }
-      : undefined,
     offers: {
       "@type": "Offer",
       price: property.price,
@@ -169,90 +154,19 @@ export default async function PropertyPage({
             <span>{purposeLabels[property.purpose]}</span>
             <span>{propertyTypeLabels[property.propertyType]}</span>
             <span>{statusLabels[property.status]}</span>
-            {property.isDemo && <span>Demonstrativo</span>}
           </div>
           <h1>{property.title}</h1>
           <p className="property-address">
             <MapPin size={19} weight="duotone" aria-hidden="true" />
-            {property.approximateAddress}
+            {property.city}
           </p>
           <strong className="property-price">
             {formatCurrency(property.price, property.purpose)}
           </strong>
 
-          {property.isDemo && (
-            <div className="demo-notice">
-              Este imóvel, suas fotos e seus valores são demonstrativos. O
-              conteúdo será substituído pelos cadastros reais no Supabase.
-            </div>
-          )}
-
-          <div className="property-specs">
-            {property.bedrooms !== undefined && (
-              <div><Bed size={24} aria-hidden="true" /><span>Quartos</span><strong>{property.bedrooms}</strong></div>
-            )}
-            {property.suites !== undefined && (
-              <div><Buildings size={24} aria-hidden="true" /><span>Suítes</span><strong>{property.suites}</strong></div>
-            )}
-            {property.bathrooms !== undefined && (
-              <div><Bathtub size={24} aria-hidden="true" /><span>Banheiros</span><strong>{property.bathrooms}</strong></div>
-            )}
-            {property.parkingSpaces !== undefined && (
-              <div><Car size={24} aria-hidden="true" /><span>Vagas</span><strong>{property.parkingSpaces}</strong></div>
-            )}
-            {property.area !== undefined && (
-              <div><Ruler size={24} aria-hidden="true" /><span>Área privativa</span><strong>{property.area} m²</strong></div>
-            )}
-            {property.builtArea !== undefined && property.builtArea !== property.area && (
-              <div><Ruler size={24} aria-hidden="true" /><span>Área construída</span><strong>{property.builtArea} m²</strong></div>
-            )}
-          </div>
-
-          {(property.condominiumFee !== undefined || property.iptu !== undefined) && (
-            <dl className="property-costs">
-              {property.condominiumFee !== undefined && (
-                <div>
-                  <dt>Condomínio</dt>
-                  <dd>{formatCurrency(property.condominiumFee)}/mês</dd>
-                </div>
-              )}
-              {property.iptu !== undefined && (
-                <div>
-                  <dt>IPTU informado</dt>
-                  <dd>{formatCurrency(property.iptu)}/ano</dd>
-                </div>
-              )}
-            </dl>
-          )}
-
           <div className="property-copy">
             <h2>Sobre este imóvel</h2>
             <p>{property.description}</p>
-          </div>
-
-          {property.amenities.length > 0 && (
-            <div className="property-copy">
-              <h2>Diferenciais</h2>
-              <ul className="amenities-grid">
-                {property.amenities.map((amenity) => (
-                  <li key={amenity}>
-                    <Check size={18} weight="bold" aria-hidden="true" />
-                    {amenity}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="location-panel">
-            <MapPin size={30} weight="duotone" aria-hidden="true" />
-            <div>
-              <h2>Localização aproximada</h2>
-              <p>
-                {property.city}, {property.state}. O endereço completo é
-                informado conforme a política de segurança do imóvel.
-              </p>
-            </div>
           </div>
         </div>
 
@@ -267,16 +181,11 @@ export default async function PropertyPage({
             target="_blank"
             rel="noreferrer"
             data-track="whatsapp_click"
-            data-property-code={property.code}
             data-destination="property_detail"
           >
             <WhatsappLogo size={20} weight="bold" aria-hidden="true" />
             Falar sobre este imóvel
           </a>
-          <details>
-            <summary>Prefiro deixar meus dados</summary>
-            <ContactForm propertyId={property.id} />
-          </details>
         </aside>
       </section>
 

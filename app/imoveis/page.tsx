@@ -41,13 +41,6 @@ export default async function PropertiesPage({
     getProperties(),
   ]);
   const cities = [...new Set(allProperties.map((property) => property.city))];
-  const neighborhoods = [
-    ...new Set(
-      allProperties
-        .map((property) => property.neighborhood)
-        .filter((value): value is string => Boolean(value)),
-    ),
-  ];
   const titleParts = [
     filters.purpose ? purposeLabels[filters.purpose] : "Imóveis",
     filters.propertyType ? propertyTypeLabels[filters.propertyType] : undefined,
@@ -113,20 +106,13 @@ export default async function PropertiesPage({
 
           <details className="filters-panel" open>
             <summary>Filtros da busca</summary>
-            <PropertyFilters
-              filters={filters}
-              cities={cities}
-              neighborhoods={neighborhoods}
-            />
+            <PropertyFilters filters={filters} cities={cities} />
           </details>
 
           <div className="catalog-result-heading">
             <h2>
               {properties.length} {properties.length === 1 ? "imóvel" : "imóveis"}
             </h2>
-            {allProperties.some((property) => property.isDemo) && (
-              <p>Fotos, informações e valores demonstrativos.</p>
-            )}
           </div>
 
           {properties.length ? (

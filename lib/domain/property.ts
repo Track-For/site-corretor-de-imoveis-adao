@@ -25,7 +25,6 @@ export interface PropertyImage {
 
 export interface Property {
   id: string;
-  code: string;
   slug: string;
   title: string;
   description: string;
@@ -33,27 +32,8 @@ export interface Property {
   propertyType: PropertyType;
   status: PropertyStatus;
   price: number;
-  condominiumFee?: number;
-  iptu?: number;
-  bedrooms?: number;
-  suites?: number;
-  bathrooms?: number;
-  parkingSpaces?: number;
-  area?: number;
-  builtArea?: number;
-  furnished?: boolean;
-  isDevelopment?: boolean;
-  featured: boolean;
-  isActive: boolean;
-  isDemo: boolean;
   city: string;
-  neighborhood?: string;
-  state: string;
-  approximateAddress: string;
-  latitude?: number;
-  longitude?: number;
   images: PropertyImage[];
-  amenities: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -62,15 +42,8 @@ export interface PropertyFilters {
   purpose?: PropertyPurpose;
   propertyType?: PropertyType;
   city?: string;
-  neighborhood?: string;
   minPrice?: number;
   maxPrice?: number;
-  bedrooms?: number;
-  suites?: number;
-  parkingSpaces?: number;
-  minArea?: number;
-  furnished?: boolean;
-  isDevelopment?: boolean;
   status?: PropertyStatus;
 }
 
