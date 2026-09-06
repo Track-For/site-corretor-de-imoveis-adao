@@ -88,13 +88,13 @@ export default async function HomePage() {
   ]);
   const cities = [...new Set(allProperties.map((property) => property.city))];
   const marqueeSource: PropertyMarqueeItem[] = allProperties.flatMap((property) =>
-    property.images.map((image) => ({
-      id: image.id,
+    property.images.map((image, index) => ({
+      id: `${property.id}-${index}`,
       title: property.title,
       meta: `${purposeLabels[property.purpose]} · ${propertyTypeLabels[property.propertyType]}`,
       href: `/imoveis/${property.slug}`,
-      imageUrl: image.url,
-      imageAlt: image.alt,
+      imageUrl: image,
+      imageAlt: property.title,
     })),
   );
   const marqueeItems = marqueeSource.length

@@ -31,15 +31,15 @@ export function PropertyCard({
         {primaryImage ? (
           <>
             <Image
-              src={primaryImage.url}
-              alt={primaryImage.alt}
+              src={primaryImage}
+              alt={property.title}
               fill
               priority={priority}
               sizes={featured ? "(max-width: 768px) 100vw, 64vw" : "(max-width: 768px) 100vw, 48vw"}
               className="property-card__image property-card__image--primary"
             />
             <Image
-              src={hoverImage.url}
+              src={hoverImage}
               alt=""
               fill
               sizes={featured ? "(max-width: 768px) 100vw, 64vw" : "(max-width: 768px) 100vw, 48vw"}

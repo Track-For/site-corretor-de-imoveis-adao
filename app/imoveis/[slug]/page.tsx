@@ -41,7 +41,7 @@ export async function generateMetadata({
       title,
       description,
       images: property.images[0]
-        ? [{ url: property.images[0].url, alt: property.images[0].alt }]
+        ? [{ url: property.images[0], alt: property.title }]
         : [],
     },
   };
@@ -79,7 +79,7 @@ export default async function PropertyPage({
     name: property.title,
     description: property.description,
     url: `${siteUrl}/imoveis/${property.slug}`,
-    image: property.images.map((image) => `${siteUrl}${image.url}`),
+    image: property.images.map((image) => `${siteUrl}${image}`),
     address: {
       "@type": "PostalAddress",
       addressLocality: property.city,

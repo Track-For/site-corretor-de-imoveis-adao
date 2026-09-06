@@ -30,9 +30,9 @@ create table public.properties (
   status public.property_status not null default 'draft',
   price numeric(14, 2) not null check (price >= 0),
   city text not null,
-  -- Array de objetos: [{ "url": "...", "alt": "...", "order": 0 }, ...]
+  -- Lista simples de links das fotos, na ordem de exibição.
   -- As imagens em si ficam no Storage do Supabase; aqui só entram as URLs.
-  images jsonb not null default '[]'::jsonb,
+  images text[] not null default '{}',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

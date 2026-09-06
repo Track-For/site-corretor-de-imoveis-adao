@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { ArrowsOut, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import type { PropertyImage } from "@/lib/domain/property";
 
 export function PropertyGallery({
   images,
   title,
 }: {
-  images: PropertyImage[];
+  images: string[];
   title: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -39,14 +38,14 @@ export function PropertyGallery({
         {images.slice(0, 3).map((image, index) => (
           <button
             type="button"
-            key={image.id}
+            key={image}
             className={index === 0 ? "property-gallery__main" : "property-gallery__side"}
             onClick={() => setOpen(true)}
             aria-label={`Ampliar foto ${index + 1} de ${title}`}
           >
             <Image
-              src={image.url}
-              alt={image.alt}
+              src={image}
+              alt={`Foto ${index + 1} de ${title}`}
               fill
               priority={index === 0}
               sizes={index === 0 ? "(max-width: 767px) 100vw, 66vw" : "34vw"}
@@ -75,11 +74,11 @@ export function PropertyGallery({
             <X size={24} />
           </button>
           <div className="gallery-modal__track">
-            {images.map((image) => (
-              <div className="gallery-modal__image" key={image.id}>
+            {images.map((image, index) => (
+              <div className="gallery-modal__image" key={image}>
                 <Image
-                  src={image.url}
-                  alt={image.alt}
+                  src={image}
+                  alt={`Foto ${index + 1} de ${title}`}
                   fill
                   sizes="100vw"
                 />

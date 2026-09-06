@@ -18,11 +18,7 @@ interface SupabaseRow {
   status: PropertyStatus;
   price: number;
   city: string;
-  images?: Array<{
-    url: string;
-    alt: string;
-    order: number;
-  }>;
+  images?: string[];
   created_at: string;
   updated_at: string;
 }
@@ -38,15 +34,7 @@ function fromRow(row: SupabaseRow): Property {
     status: row.status,
     price: Number(row.price),
     city: row.city,
-    images: (row.images || [])
-      .map((image, index) => ({
-        id: `${row.id}-${index}`,
-        propertyId: row.id,
-        url: image.url,
-        alt: image.alt,
-        order: image.order,
-      }))
-      .sort((a, b) => a.order - b.order),
+    images: row.images || [],
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };

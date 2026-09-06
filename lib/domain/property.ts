@@ -15,14 +15,6 @@ export type PropertyStatus =
   | "rented"
   | "inactive";
 
-export interface PropertyImage {
-  id: string;
-  propertyId: string;
-  url: string;
-  alt: string;
-  order: number;
-}
-
 export interface Property {
   id: string;
   slug: string;
@@ -33,7 +25,7 @@ export interface Property {
   status: PropertyStatus;
   price: number;
   city: string;
-  images: PropertyImage[];
+  images: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -47,10 +39,4 @@ export interface PropertyFilters {
   status?: PropertyStatus;
 }
 
-export interface PropertyInput
-  extends Omit<
-    Property,
-    "id" | "createdAt" | "updatedAt" | "images"
-  > {
-  images: Omit<PropertyImage, "id" | "propertyId">[];
-}
+export type PropertyInput = Omit<Property, "id" | "createdAt" | "updatedAt">;
