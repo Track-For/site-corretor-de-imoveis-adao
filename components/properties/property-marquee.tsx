@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useEffect, useRef } from "react";
 import styles from "./property-marquee.module.css";
 
 export type PropertyMarqueeItem = {
@@ -24,26 +23,30 @@ function MarqueeRow({
 }) {
   return (
     <div ref={rowRef} className={styles.row}>
-      {items.map((item) => (
-        <Link
-          key={item.id}
-          href={item.href}
-          className={styles.card}
-          data-track="select_property"
-        >
-          <Image
-            src={item.imageUrl}
-            alt={item.imageAlt}
-            fill
-            sizes="(max-width: 767px) 78vw, (max-width: 1200px) 32vw, 500px"
-            className={styles.image}
-          />
-          <span className={styles.caption}>
-            <span>{item.meta}</span>
-            <strong>{item.title}</strong>
-          </span>
-        </Link>
-      ))}
+      {Array.from({ length: 3 }, (_, repetition) =>
+        items.map((item) => (
+          <Link
+            key={`${repetition}-${item.id}`}
+            href={item.href}
+            className={styles.card}
+            data-track="select_property"
+            aria-hidden={repetition === 0 ? undefined : true}
+            tabIndex={repetition === 0 ? undefined : -1}
+          >
+            <Image
+              src={item.imageUrl}
+              alt={repetition === 0 ? item.imageAlt : ""}
+              fill
+              sizes="(max-width: 767px) 78vw, (max-width: 1200px) 32vw, 500px"
+              className={styles.image}
+            />
+            <span className={styles.caption}>
+              <span>{item.meta}</span>
+              <strong>{item.title}</strong>
+            </span>
+          </Link>
+        )),
+      )}
     </div>
   );
 }
@@ -56,67 +59,73 @@ export function PropertyMarquee({ items }: { items: PropertyMarqueeItem[] }) {
   const firstRow = items.slice(0, midpoint);
   const secondRow = items.slice(midpoint);
 
-  useGSAP(
-    () => {
-      const section = sectionRef.current;
-      const first = firstRowRef.current;
-      const second = secondRowRef.current;
+  useEffect(() => {
+    const section = sectionRef.current;
+    const first = firstRowRef.current;
+    const second = secondRowRef.current;
 
-      if (!section || !first || !second) return;
+    if (!section || !first || !second) return;
 
-      const media = gsap.matchMedia();
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let animationFrame: number | undefined;
 
-      media.add("(prefers-reduced-motion: no-preference)", () => {
-        const travel = (row: HTMLDivElement) =>
-          Math.max(0, row.scrollWidth - section.clientWidth);
+    const updateRows = () => {
+      animationFrame = undefined;
 
-        const scrollTrigger = {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-        };
+      if (reducedMotion.matches) {
+        first.style.removeProperty("transform");
+        second.style.removeProperty("transform");
+        return;
+      }
 
-        gsap.fromTo(
-          first,
-          { x: () => -travel(first), force3D: true },
-          {
-            x: 0,
-            ease: "none",
-            force3D: true,
-            scrollTrigger: {
-              ...scrollTrigger,
-              onEnter: () => gsap.set(first, { willChange: "transform" }),
-              onLeave: () => gsap.set(first, { willChange: "auto" }),
-              onEnterBack: () => gsap.set(first, { willChange: "transform" }),
-              onLeaveBack: () => gsap.set(first, { willChange: "auto" }),
-            },
-          },
-        );
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      const offset =
+        (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+      const getSequenceWidth = (
+        row: HTMLDivElement,
+        sequenceLength: number,
+      ) => {
+        const firstDuplicate = row.children[sequenceLength] as
+          | HTMLElement
+          | undefined;
+        return firstDuplicate?.offsetLeft ?? row.scrollWidth / 3;
+      };
+      const firstSequenceWidth = getSequenceWidth(first, firstRow.length);
+      const secondSequenceWidth = getSequenceWidth(second, secondRow.length);
+      const movement = offset - 200;
 
-        gsap.fromTo(
-          second,
-          { x: 0, force3D: true },
-          {
-            x: () => -travel(second),
-            ease: "none",
-            force3D: true,
-            scrollTrigger: {
-              ...scrollTrigger,
-              onEnter: () => gsap.set(second, { willChange: "transform" }),
-              onLeave: () => gsap.set(second, { willChange: "auto" }),
-              onEnterBack: () => gsap.set(second, { willChange: "transform" }),
-              onLeaveBack: () => gsap.set(second, { willChange: "auto" }),
-            },
-          },
-        );
-      });
+      first.style.transform = `translate3d(${
+        -firstSequenceWidth + movement
+      }px, 0, 0)`;
+      second.style.transform = `translate3d(${
+        -secondSequenceWidth - movement
+      }px, 0, 0)`;
+    };
 
-      return () => media.revert();
-    },
-    { scope: sectionRef, dependencies: [items.length] },
-  );
+    const requestUpdate = () => {
+      if (animationFrame === undefined) {
+        animationFrame = window.requestAnimationFrame(updateRows);
+      }
+    };
+
+    updateRows();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    reducedMotion.addEventListener("change", requestUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      reducedMotion.removeEventListener("change", requestUpdate);
+      if (animationFrame !== undefined) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+      first.style.removeProperty("transform");
+      second.style.removeProperty("transform");
+    };
+  }, [firstRow.length, secondRow.length]);
 
   if (!firstRow.length || !secondRow.length) return null;
 

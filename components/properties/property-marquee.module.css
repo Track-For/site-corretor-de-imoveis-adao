@@ -49,6 +49,7 @@
   width: max-content;
   flex-wrap: nowrap;
   gap: clamp(12px, 1.4vw, 20px);
+  will-change: transform;
 }
 
 .card {
