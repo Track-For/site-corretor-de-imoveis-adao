@@ -8,38 +8,91 @@ import type {
 } from "@/lib/domain/property";
 import type { PropertyRepository } from "./property-repository";
 
+type DbFinalidade = "venda" | "aluguel";
+type DbTipoImovel = "apartamento" | "casa" | "comercial" | "terreno" | "rural";
+type DbStatus =
+  | "rascunho"
+  | "disponivel"
+  | "reservado"
+  | "vendido"
+  | "alugado"
+  | "inativo";
+
+const PURPOSE_TO_DB: Record<PropertyPurpose, DbFinalidade> = {
+  sale: "venda",
+  rent: "aluguel",
+};
+const PURPOSE_FROM_DB: Record<DbFinalidade, PropertyPurpose> = {
+  venda: "sale",
+  aluguel: "rent",
+};
+
+const TYPE_TO_DB: Record<PropertyType, DbTipoImovel> = {
+  apartment: "apartamento",
+  house: "casa",
+  commercial: "comercial",
+  land: "terreno",
+  rural: "rural",
+};
+const TYPE_FROM_DB: Record<DbTipoImovel, PropertyType> = {
+  apartamento: "apartment",
+  casa: "house",
+  comercial: "commercial",
+  terreno: "land",
+  rural: "rural",
+};
+
+const STATUS_TO_DB: Record<PropertyStatus, DbStatus> = {
+  draft: "rascunho",
+  available: "disponivel",
+  reserved: "reservado",
+  sold: "vendido",
+  rented: "alugado",
+  inactive: "inativo",
+};
+const STATUS_FROM_DB: Record<DbStatus, PropertyStatus> = {
+  rascunho: "draft",
+  disponivel: "available",
+  reservado: "reserved",
+  vendido: "sold",
+  alugado: "rented",
+  inativo: "inactive",
+};
+
+const PUBLIC_STATUSES: PropertyStatus[] = ["available", "reserved", "sold", "rented"];
+
 interface SupabaseRow {
   id: string;
   slug: string;
-  title: string;
-  description: string;
-  purpose: PropertyPurpose;
-  property_type: PropertyType;
-  status: PropertyStatus;
-  price: number;
-  city: string;
-  images?: Array<string | null>;
-  created_at: string;
-  updated_at: string;
+  titulo: string;
+  descricao: string;
+  finalidade: DbFinalidade;
+  tipo_imovel: DbTipoImovel;
+  status: DbStatus;
+  preco: number;
+  cidade: string;
+  imagens?: Array<string | null>;
+  criado_em: string;
+  atualizado_em: string;
 }
 
 function fromRow(row: SupabaseRow): Property {
   return {
     id: row.id,
     slug: row.slug,
-    title: row.title,
-    description: row.description,
-    purpose: row.purpose,
-    propertyType: row.property_type,
-    status: row.status,
-    price: Number(row.price),
-    city: row.city,
-    images: (row.images || []).filter(
+    title: row.titulo,
+    description: row.descricao,
+    purpose: PURPOSE_FROM_DB[row.finalidade],
+    propertyType: TYPE_FROM_DB[row.tipo_imovel],
+    status: STATUS_FROM_DB[row.status],
+    price: Number(row.preco),
+    city: row.cidade,
+    images: (row.imagens || []).filter(
       (image): image is string =>
         typeof image === "string" && image.trim().length > 0,
     ),
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
+    createdAt: row.criado_em,
+    updatedAt: row.atualizado_em,
   };
 }
 
@@ -85,19 +138,23 @@ export class SupabasePropertyRepository implements PropertyRepository {
   async getProperties(filters: PropertyFilters = {}) {
     const params = new URLSearchParams({
       select: "*",
-      order: "created_at.desc",
+      order: "criado_em.desc",
     });
 
-    if (filters.purpose) params.set("purpose", `eq.${filters.purpose}`);
+    if (filters.purpose)
+      params.set("finalidade", `eq.${PURPOSE_TO_DB[filters.purpose]}`);
     if (filters.propertyType)
-      params.set("property_type", `eq.${filters.propertyType}`);
-    if (filters.city) params.set("city", `eq.${filters.city}`);
-    if (filters.minPrice) params.set("price", `gte.${filters.minPrice}`);
-    if (filters.maxPrice) params.append("price", `lte.${filters.maxPrice}`);
+      params.set("tipo_imovel", `eq.${TYPE_TO_DB[filters.propertyType]}`);
+    if (filters.city) params.set("cidade", `eq.${filters.city}`);
+    if (filters.minPrice) params.set("preco", `gte.${filters.minPrice}`);
+    if (filters.maxPrice) params.append("preco", `lte.${filters.maxPrice}`);
     if (filters.status) {
-      params.set("status", `eq.${filters.status}`);
+      params.set("status", `eq.${STATUS_TO_DB[filters.status]}`);
     } else {
-      params.set("status", "in.(available,reserved,sold,rented)");
+      params.set(
+        "status",
+        `in.(${PUBLIC_STATUSES.map((status) => STATUS_TO_DB[status]).join(",")})`,
+      );
     }
 
     const rows = await this.request<SupabaseRow[]>(
