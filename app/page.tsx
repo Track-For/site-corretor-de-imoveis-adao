@@ -193,7 +193,6 @@ export default async function HomePage() {
           <div className="hero__story" aria-hidden="true">
             <div className="hero__chapter hero__chapter--curation">
               <div className="hero__chapter-meta">
-                <span>02 / 03</span>
                 <i />
                 <span>Curadoria com propósito</span>
               </div>
@@ -209,7 +208,6 @@ export default async function HomePage() {
             </div>
             <div className="hero__chapter hero__chapter--confidence">
               <div className="hero__chapter-meta">
-                <span>03 / 03</span>
                 <i />
                 <span>Da escolha às chaves</span>
               </div>
