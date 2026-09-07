@@ -2435,8 +2435,11 @@ h3 {
   .hero__content {
     display: flex;
     min-height: max(720px, calc(100dvh - var(--header-height)));
-    align-items: flex-end;
-    padding-block: 96px 78px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 24px;
+    padding-block: 72px max(120px, calc(96px + env(safe-area-inset-bottom)));
   }
 
   .hero__copy {
@@ -2445,7 +2448,7 @@ h3 {
   }
 
   .hero__story {
-    inset: auto 0 220px;
+    inset: auto 0 250px;
     align-items: end;
     height: min(70vh, 560px);
     transform: none;
@@ -2484,8 +2487,7 @@ h3 {
   }
 
   .hero__actions {
-    bottom: 78px;
-    left: 0;
+    position: static;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
