@@ -176,19 +176,13 @@ export default async function HomePage() {
               <span aria-hidden="true" /> Curadoria imobiliária em Goiás
             </p>
             <h1 id="hero-title">
-              <span className="hero__title-line">Onde o próximo</span>
-              <span className="hero__title-line"><em>capítulo</em> ganha</span>
-              <span className="hero__title-line">endereço</span>
+              <span className="hero__title-line">O imóvel certo para</span>
+              <span className="hero__title-line">o seu próximo <em>capítulo</em></span>
             </h1>
             <p className="hero__description">
-              Para comprar, vender ou alugar com clareza, repertório local e
-              uma conversa direta do primeiro contato às chaves
+              Comprar, vender ou alugar com clareza, repertório local e
+              atendimento direto
             </p>
-            <div className="hero__trust" aria-label="Informações profissionais">
-              <span>Atendimento pessoal</span>
-              <span>{broker.address.city}</span>
-              <span>{broker.creci}</span>
-            </div>
           </div>
           <div className="hero__story" aria-hidden="true">
             <div className="hero__chapter hero__chapter--curation">
@@ -244,21 +238,16 @@ export default async function HomePage() {
             </a>
           </div>
           <div className="hero__aside" aria-hidden="true">
-            <span>Residencial</span>
+            <span>{broker.address.city}</span>
             <strong>Escolhas com intenção</strong>
-            <small>Goiás · Brasil</small>
+            <small>{broker.creci}</small>
           </div>
-        </div>
-        <div className="hero__scroll" aria-hidden="true">
-          <span>Explore</span>
-          <i />
         </div>
       </section>
 
       <section className="search-band" aria-labelledby="search-title">
         <div className="shell">
           <div className="search-band__heading">
-            <p className="eyebrow">Busca personalizada</p>
             <h2 id="search-title">Comece pelo que importa</h2>
             <p>Escolha os critérios principais. O catálogo faz o restante.</p>
           </div>
@@ -317,8 +306,8 @@ export default async function HomePage() {
             <figure className="broker-portrait">
               <div className="broker-portrait__image" data-parallax-media>
                 <Image
-                  src="/images/corretor-placeholder.webp"
-                  alt="Modelo fictício usado temporariamente no lugar da foto profissional de Adão"
+                  src="/images/Imagem Adão.jpg"
+                  alt="Retrato profissional do corretor Adão de Souza Dourado"
                   fill
                   sizes="(max-width: 767px) 100vw, 42vw"
                 />
@@ -331,14 +320,10 @@ export default async function HomePage() {
                   sizes="(max-width: 767px) 42vw, 18vw"
                 />
               </div>
-              <figcaption>
-                Imagem provisória com modelo fictício — substituir pela foto oficial
-              </figcaption>
             </figure>
           </Reveal>
 
           <Reveal className="broker-copy">
-            <p className="eyebrow">Presença em cada etapa</p>
             <div className="section-heading__rule" data-draw-line aria-hidden="true" />
             <h2 id="broker-title">Uma escolha importante pede atenção de verdade</h2>
             <p className="broker-copy__lead">
@@ -371,20 +356,16 @@ export default async function HomePage() {
         <div className="shell">
           <Reveal>
             <div className="section-heading section-heading--stacked">
-              <p className="eyebrow">Como posso ajudar</p>
               <div className="section-heading__rule" data-draw-line aria-hidden="true" />
               <h2 id="services-title">Estratégia para cada movimento imobiliário</h2>
               <p>Do primeiro filtro à negociação, cada etapa tem um propósito</p>
             </div>
           </Reveal>
           <div className="services-list">
-            {services.map((service, index) => {
+            {services.map((service) => {
               const Icon = service.icon;
               return (
                 <Reveal key={service.title} className="service-item">
-                  <span className="service-item__number" aria-hidden="true">
-                    0{index + 1}
-                  </span>
                   <Icon size={27} weight="duotone" aria-hidden="true" />
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
@@ -437,7 +418,6 @@ export default async function HomePage() {
       <section className="section local-section" aria-labelledby="local-title">
         <div className="shell local-grid">
           <Reveal className="local-copy">
-            <p className="eyebrow">Conhecimento local</p>
             <MapPin size={28} weight="duotone" aria-hidden="true" />
             <h2 id="local-title">Perto o bastante para entender cada detalhe</h2>
             <p>{broker.serviceArea}</p>
@@ -461,7 +441,6 @@ export default async function HomePage() {
       <section className="section faq-section" aria-labelledby="faq-title">
         <div className="shell faq-grid">
           <Reveal className="faq-intro">
-            <p className="eyebrow">Antes de conversar</p>
             <h2 id="faq-title">Perguntas que ajudam a dar o primeiro passo</h2>
             <p>Respostas objetivas sobre busca, anúncio e atendimento</p>
           </Reveal>
@@ -479,10 +458,9 @@ export default async function HomePage() {
       <section className="section contact-section" id="contato" aria-labelledby="contact-title">
         <div className="shell">
           <Reveal className="contact-intro">
-            <p className="eyebrow">Uma conversa, sem compromisso</p>
             <h2 id="contact-title">Seu próximo endereço pode começar aqui</h2>
             <p>
-              Conte o que você procura — ou o que deseja anunciar. Adão responde
+              Conte o que você procura ou o que deseja anunciar. Adão responde
               pessoalmente e ajuda a organizar os próximos passos.
             </p>
             <a
@@ -494,7 +472,7 @@ export default async function HomePage() {
               data-destination="contact_section"
             >
               <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
-                Iniciar conversa
+              Falar com Adão
             </a>
           </Reveal>
         </div>

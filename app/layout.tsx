@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Barlow_Condensed, Manrope } from "next/font/google";
 import { AnalyticsEvents } from "@/components/analytics/analytics-events";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -13,11 +13,11 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -52,12 +52,16 @@ export const metadata: Metadata = {
     description: "Atendimento imobiliário direto e personalizado.",
     images: ["/images/hero-casa-conceitual.webp"],
   },
+  icons: {
+    icon: "/images/Logo_Adão-removebg-preview.png",
+    apple: "/images/Logo_Adão-removebg-preview.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth">
-      <body className={`${manrope.variable} ${cormorant.variable}`}>
+      <body className={`${manrope.variable} ${barlowCondensed.variable}`}>
         <a href="#conteudo" className="skip-link">
           Ir para o conteúdo
         </a>

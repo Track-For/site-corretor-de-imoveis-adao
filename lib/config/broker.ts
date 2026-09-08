@@ -1,6 +1,6 @@
 export const broker = {
   legalName: "Adão de Souza Dourado",
-  displayName: "Adão Corretor de Imóveis",
+  displayName: "Dourado Imóveis",
   firstName: "Adão",
   creci: "CRECI-GO 8627",
   phonePrimary: "+55 62 99256-7575",

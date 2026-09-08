@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { broker } from "@/lib/config/broker";
 import { buildGeneralWhatsAppUrl } from "@/lib/utils/whatsapp";
@@ -7,9 +8,16 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="shell footer-grid">
         <div>
-          <Link href="/" className="footer-brand">
-            Adão Corretor de Imóveis
+          <Link href="/" className="footer-brand" aria-label="Dourado Imóveis - página inicial">
+            <Image
+              src="/images/Logo_Adão-removebg-preview.png"
+              alt="Dourado Imóveis"
+              width={500}
+              height={500}
+              sizes="112px"
+            />
           </Link>
+          <strong className="footer-broker">Adão de Souza Dourado</strong>
           <p>{broker.creci}</p>
           <p>{broker.serviceArea}</p>
         </div>

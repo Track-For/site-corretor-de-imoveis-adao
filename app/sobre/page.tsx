@@ -30,14 +30,13 @@ export default function AboutPage() {
           <figure className="about-hero__figure">
             <div className="about-hero__image">
               <Image
-                src="/images/corretor-placeholder.webp"
-                alt="Modelo fictício usado temporariamente no lugar da foto profissional de Adão"
+                src="/images/Imagem Adão.jpg"
+                alt="Retrato profissional do corretor Adão de Souza Dourado"
                 fill
                 priority
                 sizes="(max-width: 767px) 100vw, 48vw"
               />
             </div>
-            <figcaption>Foto provisória com modelo fictício</figcaption>
           </figure>
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { List, WhatsappLogo, X } from "@phosphor-icons/react";
@@ -23,12 +24,15 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="site-header__inner shell">
         <Link href="/" className="brand" onClick={() => setOpen(false)}>
-          <span className="brand__monogram" aria-hidden="true">
-            AD
-          </span>
-          <span className="brand__name">
-            Adão
-            <small>Consultoria imobiliária</small>
+          <span className="brand__logo">
+            <Image
+              src="/images/Logo_Adão-removebg-preview.png"
+              alt="Dourado Imóveis"
+              width={512}
+              height={512}
+              priority
+              sizes="64px"
+            />
           </span>
         </Link>
 
@@ -53,7 +57,7 @@ export function SiteHeader() {
           data-destination="header"
         >
           <WhatsappLogo size={18} weight="bold" aria-hidden="true" />
-          Atendimento
+          Falar com Adão
         </a>
 
         <button

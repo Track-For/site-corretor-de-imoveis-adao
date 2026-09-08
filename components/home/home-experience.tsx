@@ -96,7 +96,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
               0,
             )
             .to(
-              ".hero__aside, .hero__scroll",
+              ".hero__aside",
               { autoAlpha: 0, duration: 0.12, ease: "none" },
               0.08,
             )
@@ -172,12 +172,12 @@ export function HomeExperience({ children }: { children: ReactNode }) {
             "-=1.25",
           )
           .from(
-            ".hero__actions > *, .hero__trust > *",
+            ".hero__actions > *",
             { y: 18, autoAlpha: 0, stagger: 0.07, duration: 0.65 },
             "-=0.48",
           )
           .from(
-            ".hero__aside, .hero__scroll",
+            ".hero__aside",
             { autoAlpha: 0, duration: 0.7 },
             "-=0.55",
           );
