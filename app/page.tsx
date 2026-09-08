@@ -166,7 +166,7 @@ export default async function HomePage() {
             aria-hidden="true"
             tabIndex={-1}
           >
-            <source src="/videos/hero-imoveis.mp4" type="video/mp4" />
+            <source src="/videos/hero-imoveis-otimizado.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="hero__shade" aria-hidden="true" />

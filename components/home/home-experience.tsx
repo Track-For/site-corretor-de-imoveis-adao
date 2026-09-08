@@ -31,7 +31,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
         let seekFrame: number | undefined;
         let targetTime = 0;
         const playhead = { time: 0 };
-        const frameStep = 1 / 30;
+        const frameStep = 1 / 24;
 
         const commitSeek = () => {
           seekFrame = undefined;
