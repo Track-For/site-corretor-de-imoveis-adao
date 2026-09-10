@@ -82,6 +82,10 @@ const faqs = [
   },
 ];
 
+function pickRandomItem<T>(items: T[]) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
 export default async function HomePage() {
   const [featured, allProperties] = await Promise.all([
     getFeaturedProperties(3),
@@ -107,6 +111,12 @@ export default async function HomePage() {
         }),
       )
     : [];
+  const brokerDetailImage = marqueeSource.length
+    ? pickRandomItem(marqueeSource)
+    : {
+        imageUrl: "/images/apartamento-interior-conceitual.webp",
+        imageAlt: "Interior de apartamento contemporâneo",
+      };
 
   const realEstateAgentJsonLd = {
     "@context": "https://schema.org",
@@ -319,8 +329,8 @@ export default async function HomePage() {
               </div>
               <div className="broker-portrait__detail" data-parallax-media>
                 <Image
-                  src="/images/apartamento-interior-conceitual.webp"
-                  alt="Interior de apartamento contemporâneo"
+                  src={brokerDetailImage.imageUrl}
+                  alt={brokerDetailImage.imageAlt}
                   fill
                   sizes="(max-width: 767px) 42vw, 18vw"
                 />
