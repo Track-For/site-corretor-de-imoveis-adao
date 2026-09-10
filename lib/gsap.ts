@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+ScrollTrigger.config({ ignoreMobileResize: true });
 gsap.defaults({ overwrite: "auto" });
 gsap.ticker.lagSmoothing(500, 33);
 

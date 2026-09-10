@@ -150,7 +150,7 @@ export default async function HomePage() {
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero__media" data-parallax-media>
           <Image
-            src="/images/hero-video-poster.webp"
+            src="/images/hero-video-poster-otimizado.webp"
             alt="Residência contemporânea cercada por paisagismo"
             fill
             priority
@@ -162,7 +162,7 @@ export default async function HomePage() {
             muted
             playsInline
             preload="auto"
-            poster="/images/hero-video-poster.webp"
+            poster="/images/hero-video-poster-otimizado.webp"
             aria-hidden="true"
             tabIndex={-1}
           >
