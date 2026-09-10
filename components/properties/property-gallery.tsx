@@ -36,23 +36,25 @@ export function PropertyGallery({
   return (
     <>
       <div className="property-gallery">
-        {validImages.slice(0, 3).map((image, index) => (
-          <button
-            type="button"
-            key={image}
-            className={index === 0 ? "property-gallery__main" : "property-gallery__side"}
-            onClick={() => setOpen(true)}
-            aria-label={`Ampliar foto ${index + 1} de ${title}`}
-          >
-            <Image
-              src={image}
-              alt={`Foto ${index + 1} de ${title}`}
-              fill
-              priority={index === 0}
-              sizes={index === 0 ? "(max-width: 767px) 100vw, 66vw" : "34vw"}
-            />
-          </button>
-        ))}
+        <div className="property-gallery__track">
+          {validImages.slice(0, 3).map((image, index) => (
+            <button
+              type="button"
+              key={image}
+              className={index === 0 ? "property-gallery__main" : "property-gallery__side"}
+              onClick={() => setOpen(true)}
+              aria-label={`Ampliar foto ${index + 1} de ${title}`}
+            >
+              <Image
+                src={image}
+                alt={`Foto ${index + 1} de ${title}`}
+                fill
+                priority={index === 0}
+                sizes={index === 0 ? "(max-width: 767px) 88vw, 66vw" : "(max-width: 767px) 88vw, 34vw"}
+              />
+            </button>
+          ))}
+        </div>
         <button
           type="button"
           className="gallery-open"

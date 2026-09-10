@@ -1,6 +1,6 @@
 .showcase {
   overflow: clip;
-  padding-block: clamp(92px, 10vw, 148px);
+  padding-block: clamp(60px, 6vw, 88px);
   border-block: 1px solid rgb(255 250 242 / 0.08);
   background: var(--charcoal);
   color: #fffaf2;
@@ -11,7 +11,7 @@
   align-items: end;
   justify-content: space-between;
   gap: 32px;
-  margin-bottom: clamp(36px, 5vw, 64px);
+  margin-bottom: clamp(28px, 3vw, 40px);
 }
 
 .headingCopy {
@@ -56,7 +56,7 @@
   position: relative;
   display: block;
   width: clamp(270px, 32vw, 500px);
-  height: clamp(190px, 22vw, 330px);
+  height: clamp(170px, 13.5vw, 200px);
   flex: 0 0 auto;
   overflow: hidden;
   border-radius: 1px;
@@ -68,7 +68,7 @@
   position: absolute;
   inset: 35% 0 0;
   z-index: 1;
-  background: linear-gradient(180deg, transparent, rgb(7 18 15 / 0.8));
+  background: linear-gradient(180deg, transparent, rgb(13 11 45 / 0.84));
   content: "";
   pointer-events: none;
 }
@@ -103,7 +103,7 @@
 
 .caption strong {
   max-width: 28ch;
-  font-family: var(--font-cormorant), Georgia, serif;
+  font-family: var(--font-display), "Arial Narrow", sans-serif;
   font-size: clamp(1.25rem, 1.8vw, 1.7rem);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -123,8 +123,8 @@
   .card {
     width: 78vw;
     max-width: 360px;
-    height: min(56vw, 250px);
-    min-height: 200px;
+    height: min(50vw, 210px);
+    min-height: 175px;
   }
 }
 

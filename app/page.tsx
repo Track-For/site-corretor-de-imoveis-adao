@@ -245,9 +245,14 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <div className="home-content">
       <section className="search-band" aria-labelledby="search-title">
         <div className="shell">
           <div className="search-band__heading">
+            <p className="eyebrow search-band__kicker">
+              <span aria-hidden="true">01</span>
+              Busca personalizada
+            </p>
             <h2 id="search-title">Comece pelo que importa</h2>
             <p>Escolha os critérios principais. O catálogo faz o restante.</p>
           </div>
@@ -477,6 +482,7 @@ export default async function HomePage() {
           </Reveal>
         </div>
       </section>
+      </div>
       </HomeExperience>
     </main>
   );

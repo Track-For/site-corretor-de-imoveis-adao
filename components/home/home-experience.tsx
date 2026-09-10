@@ -15,6 +15,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
       const hero = root.querySelector<HTMLElement>(".hero");
       const heroMedia = root.querySelector<HTMLElement>(".hero__media");
       const heroVideo = root.querySelector<HTMLVideoElement>(".hero__video");
+      const siteHeader = document.querySelector<HTMLElement>(".site-header");
 
       const markVideoReady = () => heroMedia?.classList.add("is-video-ready");
 
@@ -66,17 +67,27 @@ export function HomeExperience({ children }: { children: ReactNode }) {
 
           heroVideo.pause();
           heroVideo.currentTime = 0;
+          root.classList.add("is-scroll-enhanced");
+          root.style.setProperty(
+            "--hero-overlay-delay",
+            `${Math.round(Math.max(0, scrollDistance - 1) * 100)}dvh`,
+          );
 
           scrollTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: hero,
-              start: "top top",
+              start: () => `top top+=${siteHeader?.offsetHeight ?? 0}`,
               end: () =>
                 `+=${Math.round(window.innerHeight * scrollDistance)}`,
               pin: true,
+              pinSpacing: false,
               scrub,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              onEnter: () => gsap.set(hero, { willChange: "transform" }),
+              onEnterBack: () => gsap.set(hero, { willChange: "transform" }),
+              onLeave: () => gsap.set(hero, { willChange: "auto" }),
+              onLeaveBack: () => gsap.set(hero, { willChange: "auto" }),
               onScrubComplete: queueSeek,
             },
           });
@@ -98,29 +109,29 @@ export function HomeExperience({ children }: { children: ReactNode }) {
             .to(
               ".hero__aside",
               { autoAlpha: 0, duration: 0.12, ease: "none" },
-              0.08,
+              0.06,
             )
             .to(
               ".hero__copy",
-              { yPercent: -8, autoAlpha: 0, duration: 0.16, ease: "none" },
-              0.14,
+              { yPercent: -8, autoAlpha: 0, duration: 0.14, ease: "none" },
+              0.1,
             )
             .fromTo(
               ".hero__chapter--curation",
               { y: 48, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.14, ease: "none" },
-              0.27,
+              { y: 0, autoAlpha: 1, duration: 0.11, ease: "none" },
+              0.18,
             )
             .to(
               ".hero__chapter--curation",
-              { y: -32, autoAlpha: 0, duration: 0.12, ease: "none" },
-              0.51,
+              { y: -32, autoAlpha: 0, duration: 0.09, ease: "none" },
+              0.3,
             )
             .fromTo(
               ".hero__chapter--confidence",
               { y: 48, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.14, ease: "none" },
-              0.61,
+              { y: 0, autoAlpha: 1, duration: 0.07, ease: "none" },
+              0.35,
             )
             .to(
               ".hero__shade",
@@ -145,6 +156,9 @@ export function HomeExperience({ children }: { children: ReactNode }) {
           if (seekFrame !== undefined) {
             window.cancelAnimationFrame(seekFrame);
           }
+          root.classList.remove("is-scroll-enhanced");
+          root.style.removeProperty("--hero-overlay-delay");
+          gsap.set(hero, { willChange: "auto" });
           scrollTimeline?.scrollTrigger?.kill();
           scrollTimeline?.kill();
         };
@@ -243,12 +257,12 @@ export function HomeExperience({ children }: { children: ReactNode }) {
 
       media.add(
         "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-        () => setupVideoScrub(2.2, 0.85),
+        () => setupVideoScrub(2.5, 0.55),
       );
 
       media.add(
         "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
-        () => setupVideoScrub(1.45, 0.65),
+        () => setupVideoScrub(2.25, 0.45),
       );
 
       media.add("(prefers-reduced-motion: reduce)", () => {
