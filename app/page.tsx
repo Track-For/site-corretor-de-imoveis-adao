@@ -111,12 +111,10 @@ export default async function HomePage() {
         }),
       )
     : [];
-  const brokerDetailImage = marqueeSource.length
-    ? pickRandomItem(marqueeSource)
-    : {
-        imageUrl: "/images/apartamento-interior-conceitual.webp",
-        imageAlt: "Interior de apartamento contemporâneo",
-      };
+  const brokerDetailImage =
+    process.env.PROPERTY_DATA_SOURCE === "supabase" && marqueeSource.length
+      ? pickRandomItem(marqueeSource)
+      : null;
 
   const realEstateAgentJsonLd = {
     "@context": "https://schema.org",
@@ -327,14 +325,16 @@ export default async function HomePage() {
                   sizes="(max-width: 767px) 100vw, 42vw"
                 />
               </div>
-              <div className="broker-portrait__detail" data-parallax-media>
-                <Image
-                  src={brokerDetailImage.imageUrl}
-                  alt={brokerDetailImage.imageAlt}
-                  fill
-                  sizes="(max-width: 767px) 42vw, 18vw"
-                />
-              </div>
+              {brokerDetailImage ? (
+                <div className="broker-portrait__detail" data-parallax-media>
+                  <Image
+                    src={brokerDetailImage.imageUrl}
+                    alt={brokerDetailImage.imageAlt}
+                    fill
+                    sizes="(max-width: 767px) 42vw, 18vw"
+                  />
+                </div>
+              ) : null}
             </figure>
           </Reveal>
 
