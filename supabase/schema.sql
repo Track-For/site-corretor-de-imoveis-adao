@@ -34,6 +34,8 @@ create table public.properties (
   -- Lista simples de links das fotos, na ordem de exibição.
   -- As imagens em si ficam no Storage do Supabase; aqui só entram as URLs.
   imagens text[] not null default '{}',
+  -- Link público (Storage do Supabase) do vídeo de apresentação do imóvel.
+  video_url text,
   criado_em timestamptz not null default now(),
   atualizado_em timestamptz not null default now()
 );

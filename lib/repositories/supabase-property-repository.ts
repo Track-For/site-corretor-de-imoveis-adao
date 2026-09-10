@@ -72,6 +72,7 @@ interface SupabaseRow {
   preco: number;
   cidade: string;
   imagens?: Array<string | null>;
+  video_url?: string | null;
   criado_em: string;
   atualizado_em: string;
 }
@@ -91,6 +92,7 @@ function fromRow(row: SupabaseRow): Property {
       (image): image is string =>
         typeof image === "string" && image.trim().length > 0,
     ),
+    videoUrl: row.video_url?.trim() ? row.video_url : undefined,
     createdAt: row.criado_em,
     updatedAt: row.atualizado_em,
   };

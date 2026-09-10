@@ -1992,6 +1992,14 @@ h3 {
   font-size: 1.02rem;
 }
 
+.property-video__player {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 20px;
+  border-radius: var(--radius);
+  background: #000;
+}
+
 .amenities-grid {
   display: grid;
   max-width: 760px;

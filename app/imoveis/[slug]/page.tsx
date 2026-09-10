@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { PropertyCard } from "@/components/properties/property-card";
 import { PropertyGallery } from "@/components/properties/property-gallery";
+import { PropertyVideo } from "@/components/properties/property-video";
 import { broker, siteUrl } from "@/lib/config/broker";
 import {
   getProperties,
@@ -163,6 +164,10 @@ export default async function PropertyPage({
             <h2>Sobre este imóvel</h2>
             <p>{property.description}</p>
           </div>
+
+          {property.videoUrl && (
+            <PropertyVideo videoUrl={property.videoUrl} title={property.title} />
+          )}
         </div>
 
         <aside className="property-contact">

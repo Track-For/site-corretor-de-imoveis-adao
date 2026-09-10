@@ -26,6 +26,7 @@ export interface Property {
   price: number;
   city: string;
   images: string[];
+  videoUrl?: string;
   createdAt: string;
   updatedAt: string;
 }
