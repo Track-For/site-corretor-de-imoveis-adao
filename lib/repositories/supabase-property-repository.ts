@@ -71,7 +71,11 @@ interface SupabaseRow {
   status: DbStatus;
   preco: number;
   cidade: string;
-  imagens?: Array<string | null>;
+  imagem_1?: string | null;
+  imagem_2?: string | null;
+  imagem_3?: string | null;
+  imagem_4?: string | null;
+  imagem_5?: string | null;
   video_url?: string | null;
   criado_em: string;
   atualizado_em: string;
@@ -88,7 +92,13 @@ function fromRow(row: SupabaseRow): Property {
     status: STATUS_FROM_DB[row.status],
     price: Number(row.preco),
     city: row.cidade,
-    images: (row.imagens || []).filter(
+    images: [
+      row.imagem_1,
+      row.imagem_2,
+      row.imagem_3,
+      row.imagem_4,
+      row.imagem_5,
+    ].filter(
       (image): image is string =>
         typeof image === "string" && image.trim().length > 0,
     ),

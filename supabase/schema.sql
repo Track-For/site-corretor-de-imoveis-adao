@@ -31,9 +31,15 @@ create table public.properties (
   status public.status_enum not null default 'rascunho',
   preco numeric(14, 2) not null check (preco >= 0),
   cidade text not null,
-  -- Lista simples de links das fotos, na ordem de exibição.
-  -- As imagens em si ficam no Storage do Supabase; aqui só entram as URLs.
-  imagens text[] not null default '{}',
+  -- Links das fotos, um por campo, na ordem de exibição. Cole a URL de
+  -- cada foto direto no campo (imagem_1 é a capa). Deixe em branco os
+  -- campos sem foto. As imagens em si ficam no Storage do Supabase; aqui
+  -- só entram as URLs.
+  imagem_1 text,
+  imagem_2 text,
+  imagem_3 text,
+  imagem_4 text,
+  imagem_5 text,
   -- Link público (Storage do Supabase) do vídeo de apresentação do imóvel.
   video_url text,
   criado_em timestamptz not null default now(),
