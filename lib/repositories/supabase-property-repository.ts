@@ -135,7 +135,7 @@ export class SupabasePropertyRepository implements PropertyRepository {
         "Content-Type": "application/json",
         ...init?.headers,
       },
-      next: { revalidate: 300, tags: ["properties"] },
+      cache: "no-store",
       signal: AbortSignal.timeout(10000),
     });
 

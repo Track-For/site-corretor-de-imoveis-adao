@@ -10,8 +10,6 @@ import type { PropertyType } from "@/lib/domain/property";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
-export const revalidate = 300;
-
 export async function generateMetadata({
   searchParams,
 }: {

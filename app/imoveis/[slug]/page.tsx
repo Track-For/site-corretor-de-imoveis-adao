@@ -19,8 +19,6 @@ import {
 } from "@/lib/utils/format";
 import { buildPropertyWhatsAppUrl } from "@/lib/utils/whatsapp";
 
-export const revalidate = 300;
-
 export async function generateMetadata({
   params,
 }: {

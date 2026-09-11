@@ -25,8 +25,6 @@ import {
 import { buildGeneralWhatsAppUrl } from "@/lib/utils/whatsapp";
 import { propertyPath, propertyTypeLabels, purposeLabels } from "@/lib/utils/format";
 
-export const revalidate = 300;
-
 const services = [
   {
     title: "Compra",
