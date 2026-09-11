@@ -4,6 +4,7 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import type { Property } from "@/lib/domain/property";
 import {
   formatCurrency,
+  propertyPath,
   propertyTypeLabels,
   purposeLabels,
   statusLabels,
@@ -25,7 +26,7 @@ export function PropertyCard({
   return (
     <article className={`property-card ${featured ? "property-card--featured" : ""}`}>
       <Link
-        href={`/imoveis/${property.slug}`}
+        href={propertyPath(property.slug)}
         className="property-card__media"
         data-track="select_property"
       >
@@ -60,7 +61,7 @@ export function PropertyCard({
           <span>{statusLabels[property.status]}</span>
         </div>
 
-        <Link href={`/imoveis/${property.slug}`} className="property-card__title">
+        <Link href={propertyPath(property.slug)} className="property-card__title">
           <h3>{property.title}</h3>
           <ArrowUpRight size={22} aria-hidden="true" />
         </Link>

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/config/broker";
 import { getProperties } from "@/lib/repositories/properties";
+import { propertyPath } from "@/lib/utils/format";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const properties = await getProperties();
@@ -17,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...properties
       .filter((property) => !["draft", "inactive"].includes(property.status))
       .map((property) => ({
-        url: `${siteUrl}/imoveis/${property.slug}`,
+        url: `${siteUrl}${propertyPath(property.slug)}`,
         lastModified: new Date(property.updatedAt),
         changeFrequency: "weekly" as const,
         priority: 0.8,

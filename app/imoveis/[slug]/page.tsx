@@ -12,6 +12,7 @@ import {
 } from "@/lib/repositories/properties";
 import {
   formatCurrency,
+  propertyPath,
   propertyTypeLabels,
   purposeLabels,
   statusLabels,
@@ -35,7 +36,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/imoveis/${property.slug}` },
+    alternates: { canonical: propertyPath(property.slug) },
     robots: property.status === "inactive" ? { index: false, follow: true } : undefined,
     openGraph: {
       type: "website",
@@ -79,7 +80,7 @@ export default async function PropertyPage({
     "@type": typeMap[property.propertyType],
     name: property.title,
     description: property.description,
-    url: `${siteUrl}/imoveis/${property.slug}`,
+    url: `${siteUrl}${propertyPath(property.slug)}`,
     image: property.images.map((image) => `${siteUrl}${image}`),
     address: {
       "@type": "PostalAddress",
@@ -117,7 +118,7 @@ export default async function PropertyPage({
         "@type": "ListItem",
         position: 3,
         name: property.title,
-        item: `${siteUrl}/imoveis/${property.slug}`,
+        item: `${siteUrl}${propertyPath(property.slug)}`,
       },
     ],
   };

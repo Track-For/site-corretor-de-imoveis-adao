@@ -23,7 +23,7 @@ import {
   getProperties,
 } from "@/lib/repositories/properties";
 import { buildGeneralWhatsAppUrl } from "@/lib/utils/whatsapp";
-import { propertyTypeLabels, purposeLabels } from "@/lib/utils/format";
+import { propertyPath, propertyTypeLabels, purposeLabels } from "@/lib/utils/format";
 
 export const revalidate = 300;
 
@@ -97,7 +97,7 @@ export default async function HomePage() {
       id: `${property.id}-${index}`,
       title: property.title,
       meta: `${purposeLabels[property.purpose]} · ${propertyTypeLabels[property.propertyType]}`,
-      href: `/imoveis/${property.slug}`,
+      href: propertyPath(property.slug),
       imageUrl: image,
       imageAlt: property.title,
     })),

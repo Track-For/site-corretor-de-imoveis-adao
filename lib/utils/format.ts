@@ -27,11 +27,17 @@ export const statusLabels: Record<PropertyStatus, string> = {
 };
 
 export function formatCurrency(value: number, purpose?: PropertyPurpose) {
+  const hasCents = value % 1 !== 0;
   const currency = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: hasCents ? 2 : 0,
+    maximumFractionDigits: 2,
   }).format(value);
 
   return purpose === "rent" ? `${currency}/mês` : currency;
+}
+
+export function propertyPath(slug: string) {
+  return `/imoveis/${encodeURIComponent(slug)}`;
 }
