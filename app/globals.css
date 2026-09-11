@@ -800,6 +800,18 @@ h3 {
   grid-row: 1 / span 2;
 }
 
+.featured-properties--sparse {
+  grid-template-rows: auto;
+}
+
+.featured-properties--sparse .featured-properties__lead {
+  grid-row: auto;
+}
+
+.featured-section .text-link--large {
+  margin-top: 32px;
+}
+
 .property-card {
   min-width: 0;
 }

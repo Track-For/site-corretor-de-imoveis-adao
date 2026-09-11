@@ -115,6 +115,10 @@ export default async function HomePage() {
     process.env.PROPERTY_DATA_SOURCE === "supabase" && marqueeSource.length
       ? pickRandomItem(marqueeSource)
       : null;
+  const localAreaImage =
+    process.env.PROPERTY_DATA_SOURCE === "supabase" && marqueeSource.length
+      ? pickRandomItem(marqueeSource)
+      : null;
 
   const realEstateAgentJsonLd = {
     "@context": "https://schema.org",
@@ -285,7 +289,11 @@ export default async function HomePage() {
           </Reveal>
 
           {featured.length ? (
-            <div className="featured-properties">
+            <div
+              className={`featured-properties${
+                featured.length < 3 ? " featured-properties--sparse" : ""
+              }`}
+            >
               {featured.map((property, index) => (
                 <Reveal
                   key={property.id}
@@ -440,16 +448,18 @@ export default async function HomePage() {
               {broker.address.city}, {broker.address.state}
             </address>
           </Reveal>
-          <Reveal className="local-image">
-            <div className="local-image__media" data-parallax-media>
-              <Image
-                src="/images/casa-piscina-conceitual.webp"
-                alt="Casa contemporânea com piscina e jardim"
-                fill
-                sizes="(max-width: 767px) 100vw, 52vw"
-              />
-            </div>
-          </Reveal>
+          {localAreaImage ? (
+            <Reveal className="local-image">
+              <div className="local-image__media" data-parallax-media>
+                <Image
+                  src={localAreaImage.imageUrl}
+                  alt={localAreaImage.imageAlt}
+                  fill
+                  sizes="(max-width: 767px) 100vw, 52vw"
+                />
+              </div>
+            </Reveal>
+          ) : null}
         </div>
       </section>
 
