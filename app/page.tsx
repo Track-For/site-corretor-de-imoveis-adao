@@ -262,7 +262,7 @@ export default async function HomePage() {
         <div className="shell">
           <div className="search-band__heading">
             <p className="eyebrow search-band__kicker">
-              <span aria-hidden="true">01</span>
+              {/* <span aria-hidden="true">01</span> */}
               Busca personalizada
             </p>
             <h2 id="search-title">Comece pelo que importa</h2>

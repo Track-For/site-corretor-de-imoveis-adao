@@ -77,8 +77,8 @@ export default function AboutPage() {
 
       <section className="section page-cta">
         <div className="shell">
-          <h2>Conte qual decisão você está considerando.</h2>
-          <p>Adão ajuda a organizar a busca ou o anúncio do seu imóvel.</p>
+          <h2>Conte qual decisão você está considerando</h2>
+          <p>Adão ajuda a organizar a busca ou o anúncio do seu imóvel</p>
           <Link href="/contato" className="button button--primary">
             Entrar em contato
             <ArrowRight size={18} aria-hidden="true" />
