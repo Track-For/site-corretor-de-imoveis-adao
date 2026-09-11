@@ -8,6 +8,8 @@ drop table if exists public.property_images cascade;
 drop table if exists public.leads cascade;
 drop table if exists public.properties cascade;
 drop function if exists public.set_updated_at cascade;
+drop function if exists public.properties_set_slug cascade;
+drop function if exists public.generate_slug cascade;
 drop type if exists public.finalidade_enum cascade;
 drop type if exists public.tipo_imovel_enum cascade;
 drop type if exists public.status_enum cascade;
@@ -23,7 +25,10 @@ create type public.status_enum as enum ('rascunho', 'disponivel', 'reservado', '
 -- campos de seleção ficam em português.
 create table public.properties (
   id uuid primary key default gen_random_uuid(),
-  slug text not null unique,
+  -- Gerado automaticamente a partir do "titulo" pelo trigger
+  -- properties_set_slug (ver abaixo). Deixe em branco para gerar; só
+  -- preencha na mão se quiser uma URL diferente do título.
+  slug text unique,
   titulo text not null,
   descricao text not null,
   finalidade public.finalidade_enum not null,
@@ -48,6 +53,68 @@ create table public.properties (
 
 create index properties_public_catalog_idx
   on public.properties (status, finalidade, tipo_imovel, cidade);
+
+-- Normaliza um texto para o formato de slug (minúsculas, números e hífen).
+-- Troca os acentos comuns do português antes de remover o resto dos símbolos.
+create or replace function public.generate_slug(input text)
+returns text
+language sql
+immutable
+as $$
+  select trim(both '-' from regexp_replace(
+    translate(
+      lower(input),
+      'áàãâäéèêëíìîïóòõôöúùûüçñ',
+      'aaaaaeeeeiiiiooooouuuucn'
+    ),
+    '[^a-z0-9]+', '-', 'g'
+  ))
+$$;
+
+-- Preenche o "slug" sozinho quando o cadastro é feito pelo Table Editor:
+-- se o campo ficar em branco, gera a partir do "titulo"; se vier
+-- preenchido, só normaliza o texto digitado. Garante unicidade adicionando
+-- "-2", "-3" etc. em caso de colisão. Editar o "titulo" depois não altera
+-- o slug já salvo (evita quebrar links publicados) — para trocar o slug,
+-- é só apagar o campo e salvar de novo.
+create or replace function public.properties_set_slug()
+returns trigger
+language plpgsql
+security invoker
+set search_path = ''
+as $$
+declare
+  base_slug text;
+  candidate text;
+  suffix int := 1;
+begin
+  if new.slug is null or trim(new.slug) = '' then
+    base_slug := public.generate_slug(new.titulo);
+  else
+    base_slug := public.generate_slug(new.slug);
+  end if;
+
+  if base_slug = '' then
+    base_slug := 'imovel';
+  end if;
+
+  candidate := base_slug;
+  while exists (
+    select 1 from public.properties
+    where slug = candidate and id is distinct from new.id
+  ) loop
+    suffix := suffix + 1;
+    candidate := base_slug || '-' || suffix;
+  end loop;
+
+  new.slug := candidate;
+  return new;
+end;
+$$;
+
+create trigger properties_set_slug
+before insert or update on public.properties
+for each row execute function public.properties_set_slug();
 
 create or replace function public.set_updated_at()
 returns trigger
