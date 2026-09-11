@@ -8,12 +8,12 @@ export function WhatsAppFab() {
       className="whatsapp-fab"
       target="_blank"
       rel="noreferrer"
-      aria-label="Falar conosco pelo WhatsApp"
+      aria-label="Fale conosco pelo WhatsApp"
       data-track="whatsapp_click"
       data-destination="floating_button"
     >
       <WhatsappLogo size={22} weight="fill" aria-hidden="true" />
-      <span>Falar conosco</span>
+      <span>Fale conosco</span>
     </a>
   );
 }

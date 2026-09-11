@@ -57,7 +57,7 @@ export function SiteFooter() {
             data-track="whatsapp_click"
             data-destination="footer"
           >
-            Falar conosco
+            Fale conosco
           </a>
         </div>
       </div>
