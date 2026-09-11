@@ -246,7 +246,7 @@ export default async function HomePage() {
               data-destination="hero"
             >
               <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
-              Falar com Adão
+              Falar conosco
             </a>
           </div>
           <div className="hero__aside" aria-hidden="true">
@@ -497,7 +497,7 @@ export default async function HomePage() {
               data-destination="contact_section"
             >
               <WhatsappLogo size={19} weight="bold" aria-hidden="true" />
-              Falar com Adão
+              Falar conosco
             </a>
           </Reveal>
         </div>

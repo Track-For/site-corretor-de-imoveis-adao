@@ -57,7 +57,7 @@ export function SiteHeader() {
           data-destination="header"
         >
           <WhatsappLogo size={18} weight="bold" aria-hidden="true" />
-          Falar com Adão
+          Falar conosco
         </a>
 
         <button
@@ -94,7 +94,7 @@ export function SiteHeader() {
             data-track="whatsapp_click"
             data-destination="mobile_menu"
           >
-            Falar com Adão
+            Falar conosco
           </a>
         </div>
       </nav>
