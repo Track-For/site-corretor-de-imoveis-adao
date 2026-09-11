@@ -785,7 +785,7 @@ h3 {
 }
 
 .featured-section .section-heading h2 {
-  max-width: 12ch;
+  max-width: none;
 }
 
 .featured-properties {
@@ -1046,7 +1046,7 @@ h3 {
 }
 
 .services-section .section-heading h2 {
-  max-width: 13ch;
+  max-width: none;
 }
 
 .services-section .section-heading p,
@@ -2529,6 +2529,11 @@ h3 {
 
   h2 {
     font-size: clamp(2rem, 9.5vw, 3.5rem);
+  }
+
+  .featured-section .section-heading h2,
+  .services-section .section-heading h2 {
+    max-width: 14ch;
   }
 
   .button {
