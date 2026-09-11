@@ -26,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const property = await getPropertyBySlug(slug);
+  const property = await getPropertyBySlug(decodeURIComponent(slug));
   if (!property) return { title: "Imóvel não encontrado" };
 
   const title = `${property.title} em ${property.city}`;
@@ -54,7 +54,7 @@ export default async function PropertyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const property = await getPropertyBySlug(slug);
+  const property = await getPropertyBySlug(decodeURIComponent(slug));
   if (!property) notFound();
 
   const allProperties = await getProperties();
