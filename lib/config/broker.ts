@@ -6,6 +6,8 @@ export const broker = {
   phonePrimary: "+55 62 99256-7575",
   phoneSecondary: "+55 62 99426-9612",
   whatsappPrimary: "5562992567575",
+  instagramUrl: "https://www.instagram.com/adaocorretor",
+  instagramHandle: "@adaocorretor",
   emails: ["adaodourado24@gmail.com", "viniciusbinha92@gmail.com"],
   address: {
     city: "Aparecida de Goiânia",

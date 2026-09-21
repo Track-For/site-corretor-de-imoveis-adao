@@ -97,6 +97,7 @@ export default async function PropertyPage({
         "@type": "RealEstateAgent",
         name: broker.displayName,
         telephone: broker.phonePrimary,
+        sameAs: [broker.instagramUrl],
       },
     },
   };

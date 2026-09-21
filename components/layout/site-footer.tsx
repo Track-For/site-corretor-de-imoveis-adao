@@ -59,6 +59,15 @@ export function SiteFooter() {
           >
             Fale conosco
           </a>
+          <a
+            href={broker.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            data-track="instagram_click"
+            data-destination="footer"
+          >
+            Instagram {broker.instagramHandle}
+          </a>
         </div>
       </div>
 

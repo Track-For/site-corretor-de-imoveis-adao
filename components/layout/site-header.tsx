@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { List, WhatsappLogo, X } from "@phosphor-icons/react";
 import { useState } from "react";
+import { broker } from "@/lib/config/broker";
 import { buildGeneralWhatsAppUrl } from "@/lib/utils/whatsapp";
 
 const navigation = [
@@ -95,6 +96,15 @@ export function SiteHeader() {
             data-destination="mobile_menu"
           >
             Fale conosco
+          </a>
+          <a
+            href={broker.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            data-track="instagram_click"
+            data-destination="mobile_menu"
+          >
+            Instagram
           </a>
         </div>
       </nav>

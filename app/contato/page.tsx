@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   Envelope,
+  InstagramLogo,
   MapPin,
   Phone,
   WhatsappLogo,
@@ -10,7 +11,7 @@ import { buildGeneralWhatsAppUrl } from "@/lib/utils/whatsapp";
 
 export const metadata: Metadata = {
   title: "Contato",
-  description: `Fale com Adão pelo WhatsApp, telefone ou e-mail. ${broker.creci}.`,
+  description: `Fale com Adão pelo WhatsApp, Instagram, telefone ou e-mail. ${broker.creci}.`,
   alternates: { canonical: "/contato" },
 };
 
@@ -22,7 +23,8 @@ export default function ContactPage() {
           <p className="eyebrow">Contato direto</p>
           <h1>Vamos falar sobre imóveis</h1>
           <p>
-            Escolha o canal mais conveniente. Para uma resposta rápida, use o WhatsApp
+            Escolha o canal mais conveniente. Para uma resposta rápida, use o
+            WhatsApp; para acompanhar novidades, visite o Instagram.
           </p>
         </div>
       </section>
@@ -40,6 +42,17 @@ export default function ContactPage() {
               <WhatsappLogo size={26} weight="duotone" aria-hidden="true" />
               <span>WhatsApp</span>
               <strong>{broker.phonePrimary}</strong>
+            </a>
+            <a
+              href={broker.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              data-track="instagram_click"
+              data-destination="contact_page"
+            >
+              <InstagramLogo size={26} weight="duotone" aria-hidden="true" />
+              <span>Instagram</span>
+              <strong>{broker.instagramHandle}</strong>
             </a>
             <a href={`tel:${broker.phoneSecondary.replace(/\D/g, "")}`}>
               <Phone size={26} weight="duotone" aria-hidden="true" />

@@ -126,6 +126,7 @@ export default async function HomePage() {
     url: siteUrl,
     telephone: [broker.phonePrimary, broker.phoneSecondary],
     email: broker.emails,
+    sameAs: [broker.instagramUrl],
     address: {
       "@type": "PostalAddress",
       addressLocality: broker.address.city,
