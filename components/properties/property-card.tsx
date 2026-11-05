@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import type { Property } from "@/lib/domain/property";
 import {
   formatCurrency,
@@ -36,15 +36,15 @@ export function PropertyCard({
               src={primaryImage}
               alt={property.title}
               fill
-              priority={priority}
-              sizes={featured ? "(max-width: 768px) 100vw, 64vw" : "(max-width: 768px) 100vw, 48vw"}
+              preload={priority}
+              sizes={featured ? "(max-width: 768px) 100vw, 56vw" : "(max-width: 768px) 100vw, 33vw"}
               className="property-card__image property-card__image--primary"
             />
             <Image
               src={hoverImage}
               alt=""
               fill
-              sizes={featured ? "(max-width: 768px) 100vw, 64vw" : "(max-width: 768px) 100vw, 48vw"}
+              sizes={featured ? "(max-width: 768px) 100vw, 56vw" : "(max-width: 768px) 100vw, 33vw"}
               className="property-card__image property-card__image--hover"
               aria-hidden="true"
             />
@@ -52,6 +52,7 @@ export function PropertyCard({
         ) : (
           <div className="property-card__placeholder">Imagem indisponível</div>
         )}
+        <span className="property-card__badge">{purposeLabels[property.purpose]}</span>
       </Link>
 
       <div className="property-card__content">
@@ -61,16 +62,14 @@ export function PropertyCard({
           <span>{statusLabels[property.status]}</span>
         </div>
 
+        <strong className="property-card__price">
+          {formatCurrency(property.price, property.purpose)}
+        </strong>
+        <p className="property-card__location"><MapPin size={15} aria-hidden="true" />{property.city}</p>
         <Link href={propertyPath(property.slug)} className="property-card__title">
           <h3>{property.title}</h3>
           <ArrowUpRight size={22} aria-hidden="true" />
         </Link>
-
-        <p className="property-card__location">{property.city}</p>
-
-        <strong className="property-card__price">
-          {formatCurrency(property.price, property.purpose)}
-        </strong>
       </div>
     </article>
   );

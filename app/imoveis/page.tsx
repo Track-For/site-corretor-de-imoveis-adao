@@ -56,11 +56,11 @@ export default async function PropertiesPage({
     <main id="conteudo" className="page-main">
       <section className="page-hero page-hero--catalog">
         <div className="shell">
-          <p className="eyebrow">Catálogo conectado à camada de dados</p>
+          <p className="eyebrow">Encontre o seu lugar</p>
           <h1>{titleParts.join(" ")}</h1>
           <p>
-            Refine sua busca. Os filtros ficam na URL para você compartilhar ou
-            retomar quando quiser
+            Explore os imóveis disponíveis e encontre o espaço que combina com
+            o seu próximo capítulo.
           </p>
         </div>
       </section>
@@ -126,7 +126,7 @@ export default async function PropertiesPage({
           ) : (
             <div className="empty-state empty-state--large">
               <h2>Nenhum imóvel corresponde aos filtros</h2>
-              <p>Tente ampliar a faixa de preço, cidade ou quantidade de quartos.</p>
+              <p>Tente ampliar a faixa de preço ou consultar outras cidades e tipos de imóvel.</p>
               <Link href="/imoveis" className="button button--primary">
                 Limpar busca
                 <ArrowRight size={18} aria-hidden="true" />

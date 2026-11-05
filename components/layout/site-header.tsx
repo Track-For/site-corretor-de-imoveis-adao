@@ -35,6 +35,7 @@ export function SiteHeader() {
               sizes="64px"
             />
           </span>
+          <span className="brand__name">Dourado<span>IMÓVEIS</span></span>
         </Link>
 
         <nav className="desktop-nav" aria-label="Navegação principal">
